@@ -1,0 +1,534 @@
+body {
+  margin: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: whitesmoke;
+  font-family:Apple Chancery, cursive;
+  font-size: 0.8rem;
+  height: 720px;
+}
+
+.Header{
+  margin: auto;
+  background-color: transparent;
+  border-radius: 0px;
+  padding: 5px;
+  font-size: 150%;
+  text-align-last: center;
+  /*text color */   
+  color: black;
+  font-family:'Times New Roman', Times, serif, cursive;
+}
+
+
+/*TOOLTIP --------------------*/
+/*reference taken from https://www.w3schools.com/css/css_tooltip.asp */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color:rgb(168, 167, 167);
+  color:black;
+  text-align: center;
+  border-radius: 2px;
+  padding: 5px ;
+
+  /* Position the tooltip */
+  position: relative;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+/* CONTAINER ----------------*/
+.container {
+display: grid;
+grid-gap: 10px;
+grid-template-columns: 20rem 25rem auto;
+color: #444;
+height: 570px;
+
+}
+
+.box {
+background-color: #cdcdcd;
+color: black;
+border-radius: 5px;
+padding: 20px;
+font-size: 150%;
+display: block;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 0, 0, 0.2) inset;
+ -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 0, 0, 0.2) inset;
+ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 0, 0, 0.2) inset;
+}
+
+.b {
+grid-column: 1 / span 1;
+grid-row: 1  /  span 1;
+height: 520px;
+}
+
+.a {
+  grid-column: 1  / span 2 ;
+  grid-row: 2  /  span 1 ;
+  width: 335px;
+  position: relative;
+  bottom:570px;
+  left: 342px;
+  max-height: 260px;
+}
+.c {
+ grid-column: 2 / span  2 ;
+  grid-row: 1  /  span  ;
+  max-width: 335px;
+  position: relative;
+  bottom:560px;
+  left:12px;
+  max-height: 200px;
+}
+
+.d {
+   grid-column: 3 / span 3 ;
+   grid-row: 1 / span 1;
+   max-height: 520px;
+   max-width: 6000px;
+   position: relative;
+ }
+
+.e{
+  grid-column: 4 / span 1  ;
+  grid-row: 1  / span 1 ;
+  position: relative;
+  min-width: 420px;
+  max-height: 521px;
+  left: 105px;
+}
+.f{
+  grid-column: 1 / 1;
+  grid-row: 1 / 1;
+  width: 800px;
+  height: 520px;
+}
+
+div.a section {
+  display: none;	
+  grid-gap: 5px;
+  grid-template-columns: 10rem auto;	
+}
+
+div.b section {	 
+  grid-gap: 44px;
+  position: relative;
+  right: 10px;
+}
+div.c section {
+  display: none; 
+  position: relative;
+}
+
+div.d section {
+    display: none;
+  position: relative;
+}
+div.e section {
+   
+  display: none;
+  position: relative; 
+  bottom: 16px;
+  font-size:19px;
+}
+
+
+#StockList {
+list-style-type: none;
+margin: 0;
+padding: 0;
+width: 306px;
+height: 465px;
+overflow: scroll;
+}
+
+.myDiv {
+
+font-size: 0.8rem;
+position: relative;
+font-feature-settings: normal;
+border: 2px;
+height: auto;
+border-radius: 10px;
+/*border-bottom-style:ridge;
+border-bottom-right-radius: 20px;*/
+border-spacing:20px; 
+transition: all 1s;
+}
+.divImg {
+display: block;
+width: 180px;
+height: 50px;
+position: relative;
+left: 50px;
+top:3px;
+}
+
+
+.myDiv:hover  {
+  
+background-color: #ffffff;
+border: none;
+color: black;
+padding: 10px 10px;
+opacity: 0.1;
+transition: .3s;    
+  
+/*  transition: .9s ease; */
+opacity: 1;
+//transition: all 1s;
+  
+  
+  
+}
+
+#imgC {
+  
+display: block;
+max-width:250px;
+max-height:50px;
+position: relative;
+left: 90px;
+bottom:40px;
+padding-bottom: 50px;
+
+}
+
+.a section{
+  position: relative;
+  font-size: 14px;
+  right:12px;
+  width: 365px;
+  height: 260px;
+  overflow: scroll; 
+  font-family:Apple Chancery, cursive;
+  text-align: justify;
+}
+.a span{
+   position: relative;
+   right: 20px;
+   font-family:Apple Chancery, cursive;
+}
+
+
+.c section{
+  position: relative;
+  font-size: 14px;
+  right:12px;
+  width: 335px;
+  height: 210px;
+  overflow: scroll;
+  font-family:Apple Chancery, cursive;
+  top: px;
+}
+.c label{
+  position: relative;
+  padding: px;
+  font-size: 14px;
+  font-family:Apple Chancery, cursive;
+}
+.c span{
+  position: relative;
+  left: 180px;
+  bottom: 27px; 
+  font-size: 14px;
+  font-family:Apple Chancery, cursive;
+}
+
+
+.d section{
+  position: relative;
+  right:1px;
+  width: 630px;
+  height: 480px;
+  overflow: scroll;
+  left: 1px;
+  top:10px;
+  font-family:Apple Chancery, cursive;
+}
+
+#stockData {
+font-family:Apple Chancery, cursive;;
+border-collapse: collapse;
+max-width: 100%; 
+}
+
+#stockData td, #stockData th {
+border: 1px solid black;
+padding: 9px;
+text-align: center; 
+font-size: 15px;
+}
+
+#stockData tr:nth-child(even){
+  background-color: #f2f2f2;
+}
+
+#stockData tr:hover 
+{
+  background-color: #ddd;
+}
+a {
+margin: 0px;
+transition: all 1.4s;
+-webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+}
+
+#stockData th {
+padding-top: 2px;
+padding-bottom: 7px;
+text-align: left;
+background-color: #4CAF50;
+color: white; 
+font-size: 12px;
+color: #fff;
+line-height: 1.4;
+text-transform: uppercase;
+background-color: #36304a;
+}
+
+
+fieldset { 
+  border: 0pt;
+  font-size:17px;
+  font-family:Apple Chancery, cursive
+}
+
+legend
+{ 
+  font-weight: 700; 
+  font-family:Apple Chancery, cursive;
+}
+
+input {
+  border: none;
+  border: solid 1px #CCCCCC;
+  border-radius: 5px;
+  width: 100%;
+  height: 2em;
+  font-family:Apple Chancery, cursive;
+}
+
+.box ul {
+  list-style: none;
+}
+
+#btnViewChart {
+  background-color: grey; 
+  width: 95px;
+  height :35px;
+  border-radius: 30px;
+  position: relative;
+  left: 543px;
+}
+
+div #btnViewChart {
+
+  display: none;
+  font-family:Apple Chancery, cursive;
+   /* references from https://tympanus.net/codrops/2012/09/13/button-switches-with-checkboxes-and-css3-fanciness/  */
+  border-radius: 50%;
+  background: #eaeaea;
+  box-shadow: 
+      0 3px 5px rgba(0,0,0,0.25),
+      inset 0 1px 0 rgba(255,255,255,0.3),
+      inset 0 -5px 5px rgba(100,100,100,0.1),
+      inset 0 5px 5px rgba(255,255,255,0.3);
+  
+}
+
+#BtnCompanyNameSpeak{
+   background-color: grey; 
+  width: 95px;
+  height :35px;
+  font-size:17px;
+  position: relative;
+  left: 24px;
+  font-family:Apple Chancery, cursive;
+   /* references from https://tympanus.net/codrops/2012/09/13/button-switches-with-checkboxes-and-css3-fanciness/  */
+  border-radius: 50%;
+  background: lightgrey;
+  box-shadow: 
+      0 3px 5px rgba(0,0,0,0.25),
+      inset 0 1px 0 rgba(255,255,255,0.3),
+      inset 0 -5px 5px rgba(100,100,100,0.1),
+      inset 0 5px 5px rgba(255,255,255,0.3);
+}
+
+#BtnCompanydescSpeak{
+  background-color: grey; 
+  width: 95px;
+  height :35px;
+  border-radius: 30px;
+  font-size:17px;
+  text-align: center;
+  position: relative;
+  left: 20px;
+  top:3px;
+  font-family:Apple Chancery, cursive;
+   /* references from https://tympanus.net/codrops/2012/09/13/button-switches-with-checkboxes-and-css3-fanciness/  */
+   border-radius: 50%;
+  background-color: lightgrey;
+  box-shadow: 
+      0 3px 5px rgba(0,0,0,0.25),
+      inset 0 1px 0 rgba(255,255,255,0.3),
+      inset 0 -5px 5px rgba(100,100,100,0.1),
+      inset 0 5px 5px rgba(255,255,255,0.3);
+}
+
+#DivcChartCompanySymbol{
+  padding-bottom: 10px;
+   font-family:Apple Chancery, cursive;
+}
+
+#DivcChartCompanyName{
+  padding-bottom: 10px;
+       font-family:Apple Chancery, cursive;
+}
+
+
+#DivcChartCompanyDesc{
+  padding-bottom: 19px;
+  text-align: justify;
+   font-family:Apple Chancery, cursive;
+}
+
+#DivcChartCompanySymbol label {
+    font-size: 17px;
+    position: relative; 
+  
+}
+
+#DivcChartCompanySymbol span{
+  font-size: 15px;
+  position: relative;
+  left:54px
+}
+  
+#DivcChartCompanyName label{
+     font-size: 18px;
+  
+}
+#DivcChartCompanyName span{
+     font-size: 15px;
+     position: relative;
+     left:9px;
+}
+
+#DivcChartCompanyDesc label{
+     font-size: 18px;
+}
+
+#DivcChartCompanyDesc span{
+    font-size: 14px;
+    position: relative;
+    left:2px;
+}
+#title {
+  display: flex;
+  position: relative;
+  left: 120px;  
+  padding-top: 13px;
+  padding-bottom: 33px;
+  font-family:Apple Chancery, cursive;
+}
+
+#calculateinfo {
+  position: relative;
+  top:15px; 
+}
+
+#calculateinfo label{
+  
+  display: flex;
+  padding-bottom: 19px;
+  font-size:15px;
+  display: flex;
+  position: relative;
+  bottom: 3px;
+  font-size:15px;
+  font-family:Apple Chancery, cursive;
+  
+}
+
+#calculateinfo span{
+  
+  display: flex;
+  position: relative;
+  left: 160px;  
+  bottom: 53px;
+  font-size:15px;
+  font-family:Apple Chancery, cursive;
+}
+
+#myChart{
+  width: 800px;
+  height: 520px;
+    -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  cursor:col-resize;
+  z-index:100;
+  background-color:transparent;
+}
+
+
+
+
+
+
+
+#BtnDefalut{
+  font-family:Apple Chancery, cursive;
+  text-align: center;
+  float: right;
+  font-size:15px;
+  position: relative;
+  bottom:43px;
+  /* references from https://tympanus.net/codrops/2012/09/13/button-switches-with-checkboxes-and-css3-fanciness/  */
+  border-radius: 50%;
+  background: #eaeaea;
+  box-shadow: 
+      0 3px 5px rgba(0,0,0,0.25),
+      inset 0 1px 0 rgba(255,255,255,0.3),
+      inset 0 -5px 5px rgba(100,100,100,0.1),
+      inset 0 5px 5px rgba(255,255,255,0.3);
+}
+
+a:link {
+color: green; 
+background-color: transparent; 
+text-decoration: none;
+}
+
+a:visited {
+color: pink;
+background-color: transparent;
+text-decoration: none;
+}
+
+a:hover {
+color: red;
+background-color: transparent;
+text-decoration: underline;
+}
+
+a:active {
+color: yellow;
+background-color: transparent;
+text-decoration: underline;
+}

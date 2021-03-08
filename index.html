@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8"/>  
+    <title>COMP 3512 Assig1</title> 
+    <title>Mohamed Zeineldin, Arham Nawasir</title>
+     
+    
+    <link rel="stylesheet" href="./css/index.css"> 
+
+
+</head>
+
+<body>
+    <header class="Header">
+        <div class="tooltip">
+            <label><h1>Credit</h1></label>
+            <span class="tooltiptext">
+                <i>Mohamed Zeineldin and Nuwasir Arham, </i>
+                <i>COMP 3512</i>
+            </span>
+        </div>
+    </header>
+
+
+<div class="Header">
+   <label><h1>Stock Market Analysis</h1></label> 
+</div>
+    
+   <main class="container">
+  <div class="box a">
+      <section>
+          <img id=imgC>
+          <span id="infoSymbolandLogo"></span> 
+          
+          <label>Name:</label>
+          <span id="infoSymbol"></span>          
+          
+          <label>CompanyName:</label>
+          <span id="infocompanyName"></span> 
+
+          <label>Sector:</label>
+          <span id="infosector"></span>     
+          
+          <label>Industry:</label>
+          <span id="infoindustry"></span>   
+                    
+          <label>Address:</label>
+           <span id="infoAddress"></span>    
+        
+          <label>Description:</label>
+            <span id="infoDescription"></span>
+
+          <label>Exchange:</label>
+          <span id="infoexchange"></span>            
+          
+          <label>Website:</label>
+           <span id="infowebsite"></span>            
+          
+                                        
+      </section>  
+  </div>
+  <div class="box b">
+      
+      <section> 
+        <fieldset>
+            <legend>Autocomplete Using Fetch </legend>
+            <input type="text" class="search" placeholder="Type for matching companies" list="filterList">
+            <datalist id="filterList">
+            </datalist>
+        </fieldset>
+        <ul id="StockList"></ul>        
+      </section>  	
+  </div>  
+  
+  <div class="box c" id="map" style="height: 300px;"></div>
+
+  <div class="box d">
+        <div>
+            <Button type="View Chart" id="btnViewChart"> </Button>
+        </div>
+            
+            <section id="dchart">
+                <table id="stockData">
+                  <tr >
+                    <th>Date</th>
+                    <th>Open</th>
+                    <th>Close</th>
+                    <th>High</th>
+                    <th>Low</th>
+                    <th>Volume</th>
+                  </tr>
+                </table>
+            </section>
+  </div>
+  <div class="box e">
+             <section>
+                 <div id="DivcChartCompanySymbol">
+                     <label>Symbol:</label>
+                     <span id="chartCompanySymbol"></span>
+                 </div>
+                 <div id="DivcChartCompanyName">
+                      <label>Company Name:</label>
+                      <span id="chartCompanyName"></span>
+                      <span id="chartCompanyNameSpeak">
+                          <Button type="Speak" id="BtnCompanyNameSpeak">
+                      </span>
+                 </div>
+                 <div id="DivcChartCompanyDesc">
+                      <label>Description:</label>
+                      <span id="chartCompanyDesc"></span> 
+                      <span id="chartCompanyDescSpeak">
+                            <Button type="Speak" id="BtnCompanydescSpeak">
+                      </span>
+                 </div>
+                        
+                     <div id="calculateinfo">
+                         
+                         <label id="title"> Monthly Summary Data: </label>
+                          <label>Average Close:</label>
+                          <span id="averageClose"></span>          
+
+                          <label>Minimum Close:</label>
+                          <span id="minimumClose"></span>          
+
+                          <label>Average Volume:</label>
+                          <span id="averageVolume"></span>       
+
+                          <label>Total Volume:</label>
+                          <span id="totalVolume"></span>   
+                     </div>
+                     <span >
+                            <Button type="Speak" id="BtnDefalut">
+                     </span>
+            </section>
+        </div>       
+  <div class="box f">
+            <section>
+                <div id="myChart" ></div>   
+                   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.8.0/extension/bmap.min.js"></script>
+                   <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.6.0/echarts-en.min.js"></script>
+                   
+                
+                
+            </section>   
+        </div>       
+  <script type="text/javascript" src="./js/index.js"></script>
+  <script async
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAp2b_XrHqfJyPZes-fcY5RAEmIkpcSV6E&callback=initMap">
+</script>
+
+</body>
+</html>
