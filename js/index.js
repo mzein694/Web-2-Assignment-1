@@ -117,8 +117,6 @@ function getCompanyData(cmpny){
             //if data isn't found in localstorage then adds the  data to localstorage 
             .then(companyData => { 
                 localStorage.setItem("["+cmpny+"]",JSON.stringify(companyData));   
-                companyLocalData = localStorage.getItem("["+cmpny+"]");
-                console.log(companyLocalData)
                 displayInfo(companyLocalData);
            })
             .catch(function (error) {
@@ -257,10 +255,12 @@ function displaychartInfo(charts){
     tr.appendChild(th);
     
     //variables  for the calculaation process
+   
+
     var avgClose=0;
     var minClose=0;
     var avgVol=0;
-    var totalVol=0;
+  
 
     //arrays for the charts
     openCalc =[];
@@ -269,8 +269,7 @@ function displaychartInfo(charts){
     lowCalc =[];
     volumeCalc =[];
     closePrices =[];
-    volums =[];
-    x = [];
+   
 
     for (let i = 0; i < companiescharts.length; i++){
         openCalc.push(companiescharts[i].open);
@@ -284,31 +283,35 @@ function displaychartInfo(charts){
     lowCalc.sort(function(a, b){return b-a});
     highCal.sort(function(a, b){return b-a});
     volumeCalc.sort(function(a, b){return b-a});
+   
+    avgClose =  average(closeCalc);
+    avgVol   = average(volumeCalc);
+    
 
-    document.getElementById("averageOpen").innerHTML = average(openCalc)
-    document.getElementById("minimumOpen").innerHTML = parseInt(openCalc.slice(-1)[0])
-    document.getElementById("maxOpen").innerHTML = parseInt(openCalc[0])
+    document.getElementById("averageOpen").innerHTML = average(openCalc);
+    document.getElementById("minimumOpen").innerHTML = parseInt(openCalc.slice(-1)[0]);
+    document.getElementById("maxOpen").innerHTML = parseInt(openCalc[0]);
 
-    document.getElementById("averageclose").innerHTML = average(closeCalc)
-    document.getElementById("minimumClose").innerHTML = parseInt(closeCalc.slice(-1)[0])
+    document.getElementById("averageclose").innerHTML = avgClose;
+    document.getElementById("minimumClose").innerHTML = parseInt(closeCalc.slice(-1)[0]);
     document.getElementById("maxClose").innerHTML = parseInt(closeCalc[0])
 
-    document.getElementById("averagelow").innerHTML = average(lowCalc)
-    document.getElementById("minimumLow").innerHTML = parseInt(lowCalc.slice(-1)[0])
+    document.getElementById("averagelow").innerHTML = average(lowCalc);
+    document.getElementById("minimumLow").innerHTML = parseInt(lowCalc.slice(-1)[0]);
     document.getElementById("maxLow").innerHTML = parseInt(lowCalc[0])
     
-    document.getElementById("averageHigh").innerHTML = average(highCal)
-    document.getElementById("minimumHigh").innerHTML = parseInt(highCal.slice(-1)[0])
-    document.getElementById("maxHigh").innerHTML = parseInt(highCal[0])
+    document.getElementById("averageHigh").innerHTML = average(highCal);
+    document.getElementById("minimumHigh").innerHTML = parseInt(highCal.slice(-1)[0]);
+    document.getElementById("maxHigh").innerHTML = parseInt(highCal[0]);
 
-    document.getElementById("averageVolume").innerHTML = average(volumeCalc)
-    document.getElementById("minimumVolume").innerHTML = parseInt(volumeCalc.slice(-1)[0])
-    document.getElementById("maxVolume").innerHTML = parseInt(volumeCalc[0])
+    document.getElementById("averageVolume").innerHTML = avgVol;
+    document.getElementById("minimumVolume").innerHTML = parseInt(volumeCalc.slice(-1)[0]);
+    document.getElementById("maxVolume").innerHTML = parseInt(volumeCalc[0]);
     
 
     for (let i = 0; i < companiescharts.length; i++){
         // adds row
-        (i==0) ? minClose=companiescharts[i]['close'] : console.log(''); 
+        
         
         var tr = document.createElement("tr");
         tbl.appendChild(tr);
@@ -341,21 +344,11 @@ function displaychartInfo(charts){
         tr.appendChild(td);
         volums.push(companiescharts[i]['volume']/10000);
 
-         avgClose = avgClose + companiescharts[i]['close'];
-         (companiescharts[i]['close'] < minClose) ? minClose = companiescharts[i]['close'] : '';
-         avgVol = avgVol + companiescharts[i]['volume'];
-        // totalVol = totalVol + companiescharts[i]['volume'];
     }
-    
-    //Average, Min close and volume calculation 
-    document.getElementById("averageClose").innerHTML = (avgClose/companiescharts.length); 
-    document.getElementById("minimumClose").innerHTML = (minClose); 
-    document.getElementById("averageVolume").innerHTML = (avgVol/companiescharts.length);
-    //document.getElementById("totalVolume").innerHTML = (totalVol);
 }
 
 function finicalTable(finData){
-    console.log(finData)
+  
     let tbl = document.getElementById('finicalData');
     tbl.innerHTML = "";
         
@@ -364,28 +357,25 @@ function finicalTable(finData){
 
     //add data items
     var th = document.createElement("th");
-    th.appendChild(document.createTextNode("Date"));
+    th.appendChild(document.createTextNode("Year"));
     tr.appendChild(th);
 
     var th = document.createElement("th");
-    th.appendChild(document.createTextNode("Open"));
+    th.appendChild(document.createTextNode("Revenue"));
     tr.appendChild(th);
 
     var th = document.createElement("th");
-    th.appendChild(document.createTextNode("High"));
+    th.appendChild(document.createTextNode("Earnings"));
     tr.appendChild(th);
 
     var th = document.createElement("th");
-    th.appendChild(document.createTextNode("Low"));
+    th.appendChild(document.createTextNode("Assets"));
     tr.appendChild(th);
 
     var th = document.createElement("th");
-    th.appendChild(document.createTextNode("Close"));
+    th.appendChild(document.createTextNode("Liabilities"));
     tr.appendChild(th);
 
-    var th = document.createElement("th");
-    th.appendChild(document.createTextNode("Volume"));
-    tr.appendChild(th);
 
     for (let i = 0; i < finData.length; i++){
         // adds row
@@ -423,16 +413,12 @@ function finicalTable(finData){
 
 
 function average(nums) {
-    //console.log(nums);
-    var avg =0.0;
-    for (var i=0; i<nums.length; i++){
+    let avg =0.0;
+    for (let i=0; i<nums.length; i++){
         avg += parseFloat(nums[i]);
-    }
-    //console.log(avg + " <===> " + nums.length);
-    console.log(avg / nums.length);
-    
+    }  
     return (parseInt(avg / nums.length));
-    // nums.reduce((p,c,_,a) => p + c/a.length,0);
+   
 }
 
 // Creating a buttom that change the view of the website 
@@ -554,6 +540,7 @@ function displayChart(closePrices,volums,x){
 }
 
 function Chart2(companyInfo){
+    
     const contain = document.querySelector("#columns");
     const Chart2 = new Chart(contain, {
         type: "bar",
