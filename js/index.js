@@ -40,14 +40,14 @@ if (localStorage.getItem('companies') == null && localStorage.getItem('companies
           .then(data => {
           localStorage.setItem('companies',JSON.stringify(data));
           localData = localStorage.getItem('companies');
-          displayList(localData);
+          displayList();
           })
           .catch(function (error) {
                 console.log(error)
            });
 } else {
     localData = localStorage.getItem('companies');
-    displayList(localData);
+    displayList();
     
 }
     
@@ -56,7 +56,7 @@ if (localStorage.getItem('companies') == null && localStorage.getItem('companies
 const searchBox = document.querySelector('.search');
 searchBox.addEventListener('keyup', function() {
         let searchText = document.querySelector('.search').value;
-        displayList(localData,searchText);
+        displayList(searchText);
 });
 
 document.querySelector("div.f ").style.visibility='hidden';
@@ -69,7 +69,7 @@ displayButtonViewChart();
 //-------------------------------------------------------------------
 // Functions definitions
 //-------------------------------------------------------------------
-function displayList(localData,filter=''){
+function displayList(filter=''){
     let ul = document.getElementById("StockList");
     ul.innerHTML = "";
     
@@ -109,33 +109,25 @@ function displayList(localData,filter=''){
         ul.appendChild(li);
         if (companies[i].symbol != null){
                 dv.addEventListener('click',function(){
-                    console.log(companies[i].symbol)
-                    liClick(companies[i].symbol);
+                   // console.log(companies[i].symbol)
+                   //console.log(companies[i]);
+                    //liClick(companies[i]);
+                    getCompanyData(companies[i].symbol);
+                    getCompanyDatachart(companies[i].symbol);
+                    
                 });
         }
     }
-    // // select first item in the company list
-    // if( document.querySelector("#StockList li").textContent != null) {
-    //     //currentSelectedSymbol=document.querySelector("#StockList li").textContent;
-    //     liClick(document.querySelector("#StockList li").textContent);
-        
-    // }
+    
 }   
 
-function liClick(companySymbol){
-  
-   
-    getCompanyData(companySymbol);
-       getCompanyDatachart(companySymbol);
-
-}    
 //Passing the symbol to the url and see if the data is store in the localstorage  
 function getCompanyData(cmpny){
 
  
-    let companyURL="https://www.randyconnolly.com/funwebdev/3rd/api/stocks/companies.php?symbol=" + cmpny ;
-    console.log(companyURL)
-    let companyLocalData=localStorage.getItem(cmpny);
+    let companyURL="https://www.randyconnolly.com/funwebdev/3rd/api/stocks/companies.php?symbol=" + cmpny;
+   // console.log(companyURL)
+    let companyLocalData= localStorage.getItem("["+cmpny+"]");
 
     if (companyLocalData==null || companyLocalData=='') {
           
@@ -144,16 +136,17 @@ function getCompanyData(cmpny){
                return companyResponse.json();
             })
             .then(companyData => { //if data isn't found in localstorage then adding the  data in the localstorage 
-                localStorage.setItem(cmpny,JSON.stringify(companyData));   
-                companyLocalData = localStorage.getItem(cmpny);
-
+                localStorage.setItem("["+cmpny+"]",JSON.stringify(companyData));   
+                companyLocalData = localStorage.getItem("["+cmpny+"]");
+                console.log(companyLocalData)
                 displayInfo(companyLocalData);
            })
             .catch(function (error) {
                 console.log(error)
         });
     } else {
-        companyLocalData = localStorage.getItem(cmpny); //Data is found
+       // console.log(companyLocalData)
+        companyLocalData = localStorage.getItem("["+cmpny+"]"); //Data is found
    
         displayInfo(companyLocalData);
     }
@@ -162,14 +155,14 @@ function getCompanyData(cmpny){
     
 // Display the symbol with its logo    
 function displayInfo(cmpny){   
-
+    console.log(cmpny)
     companyInfoData=JSON.parse(cmpny);
-
+    console.log(companyInfoData)
     document.querySelector("div.a section").style.display = "grid";
     let imgC = document.getElementById("imgC"); 
     imgC.src = './logos/' + ((companyInfoData.symbol != '') ? companyInfoData[0].symbol : companyInfoData.symbol) + '.svg';
     imgC.className ='divImg';
-    document.getElementById("infoSymbol").innerHTML = ((companyInfoData.symbol != '') ? companyInfoData[0].symbol : companyInfoData.symbol); 
+    document.getElementById("infoSymbol").innerHTML = companyInfoData[0].symbol// ((companyInfoData.symbol != '') ? companyInfoData[0].symbol : companyInfoData.symbol); 
     document.getElementById("infocompanyName").innerHTML = ((companyInfoData.name != '') ? companyInfoData[0].name : companyInfoData.name);
     document.getElementById("infoexchange").innerHTML = ((companyInfoData.exchange != '') ? companyInfoData[0].exchange : companyInfoData.exchange);
     document.getElementById("infoindustry").innerHTML = ((companyInfoData.subindustry != '') ? companyInfoData[0].subindustry : companyInfoData.subindustry);
@@ -185,12 +178,12 @@ function displayInfo(cmpny){
     selectedCompanayName=((companyInfoData.name != '') ? companyInfoData[0].name : companyInfoData.name);
     selectedCompanayDesc=((companyInfoData.website != '') ?  companyInfoData[0].description : companyInfoData.description);
 
-     console.log(companyInfoData)  
+     //console.log(companyInfoData)  
      
     lat = ((companyInfoData.latitude != '') ? companyInfoData[0].latitude : companyInfoData.latitude);
     lng = ((companyInfoData.longitude != '') ? companyInfoData[0].longitude : companyInfoData.longitude);
 
-    console.log(lat + lng)
+    //console.log(lat + lng)
     initMap();
     createMarker(map, lat, lng);
     
@@ -223,7 +216,9 @@ function initMap() {
              
 function getCompanyDatachart(cmpny){  //passing the symbol to the url and see if the data is store  in the localstorage   
     let companychartLocalData=localStorage.getItem(cmpny);
-    const companyChartURL="http://www.randyconnolly.com/funwebdev/3rd/api/stocks/history.php?company=" + cmpny ;
+   
+    const companyChartURL="http://www.randyconnolly.com/funwebdev/3rd/api/stocks/history.php?symbol=" + cmpny ;
+  
     if (companychartLocalData==null || companychartLocalData=='') {
           
            fetch(companyChartURL)
@@ -231,16 +226,24 @@ function getCompanyDatachart(cmpny){  //passing the symbol to the url and see if
                return companyCResponse.json();
             })
             .then(companyCData => { //if data isn't found in localstorage then adding the  data in the localstorage
-                localStorage.setItem(cmpny,JSON.stringify(companyCData));
-                companychartLocalData = localStorage.getItem(cmpny);
-                 displaychartInfo(companychartLocalData);
+            
+                if (companyCData.length>0) {
+                    localStorage.setItem(cmpny,JSON.stringify(companyCData));
+                    companychartLocalData = localStorage.getItem(cmpny);
+
+                    
+                }
            })
             .catch(function (error) {
-                console.log(error);
+               console.log(error);
         });
     } else { //Data found
-        companychartLocalData = localStorage.getItem(cmpny);
-
+         
+        companychartLocalData = localStorage.getItem(cmpny);        
+    }
+    console.log("Loaded...........");                
+    
+    if (companychartLocalData.length>0) {
         displaychartInfo(companychartLocalData);
     }
 
@@ -297,11 +300,11 @@ function displaychartInfo(charts){
     closePrices =[];
     volums =[];
     x = [];
-    console.log(companiescharts)
+   
     for (let i = 0; i < companiescharts.length; i++){
      
         // add row
-        (i==0) ? minClose=companiescharts[i]['close'] : console.log(""); 
+        (i==0) ? minClose=companiescharts[i]['close'] : console.log(''); 
         
         var tr = document.createElement("tr");
         tbl.appendChild(tr);
@@ -335,7 +338,7 @@ function displaychartInfo(charts){
         volums.push(companiescharts[i]['volume']/10000);
 
          avgClose = avgClose + companiescharts[i]['close'];
-         (companiescharts[i]['close'] < minClose) ? minClose = companiescharts[i]['close'] : console.log('');
+         (companiescharts[i]['close'] < minClose) ? minClose = companiescharts[i]['close'] : '';
          avgVol = avgVol + companiescharts[i]['volume'];
          totalVol = totalVol + companiescharts[i]['volume'];
     }
