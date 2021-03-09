@@ -71,7 +71,7 @@ display: block;
 .b {
 grid-column: 1 / span 1;
 grid-row: 1  /  span 1;
-height: 520px;
+height: 580px;
 }
 
 .a {
@@ -97,10 +97,16 @@ height: 520px;
    grid-column: 3 / span 3 ;
    grid-row: 1 / span 1;
    max-height: 520px;
-   max-width: 6000px;
+   width: 800px;
    position: relative;
  }
-
+ .last{
+    grid-column: 3 / span 3 ;
+    grid-row: 2 / span 1;
+    max-height: 520px;
+    width: 800px;
+    position: relative;
+}
 .e{
   grid-column: 4 / span 1  ;
   grid-row: 1  / span 1 ;
@@ -188,7 +194,7 @@ transition: .3s;
   
 /*  transition: .9s ease; */
 opacity: 1;
-//transition: all 1s;
+transition: all 1s;
   
   
   
@@ -251,7 +257,7 @@ padding-bottom: 50px;
 .d section{
   position: relative;
   right:1px;
-  width: 630px;
+  width: 990px;
   height: 480px;
   overflow: scroll;
   left: 1px;
@@ -262,7 +268,7 @@ padding-bottom: 50px;
 #stockData {
 font-family:Apple Chancery, cursive;;
 border-collapse: collapse;
-max-width: 100%; 
+max-width: 100px; 
 }
 
 #stockData td, #stockData th {
@@ -270,6 +276,7 @@ border: 1px solid black;
 padding: 9px;
 text-align: center; 
 font-size: 15px;
+width: 720px; 
 }
 
 #stockData tr:nth-child(even){
@@ -478,19 +485,13 @@ div #btnViewChart {
 #myChart{
   width: 800px;
   height: 520px;
-    -moz-user-select: none;
+  -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
   cursor:col-resize;
   z-index:100;
   background-color:transparent;
 }
-
-
-
-
-
-
 
 #BtnDefalut{
   font-family:Apple Chancery, cursive;
@@ -532,3 +533,4 @@ color: yellow;
 background-color: transparent;
 text-decoration: underline;
 }
+
