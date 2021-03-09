@@ -74,44 +74,46 @@ display: block;
 .a {
   grid-column: 1  / span 4 ;
   grid-row: 2  /  span 3 ;
-  width: 335px;
+  width: 935px;
   position: relative;
-  bottom:630px;
+  bottom:1150px;
   left: 342px;
-  max-height: 400px;
+  max-height: 600px;
 }
 
 .b {
 grid-column: 1 / span 1;
 grid-row: 1  /  span 1;
-height: 580px;
+height: 1100px;
 }
 
 .c {
  grid-column: 2 / span  3 ;
   grid-row: 1  /  span  ;
-  max-width: 335px;
+  max-width: 935px;
   position: relative;
-  bottom: 570px;
+  bottom: 1100px;
   left:12px;
-  max-height: 700px;
+  max-height: px;
 }
 
 .d {
-   grid-column: 3 / span 3 ;
-   grid-row: 1 / span 1;
-   max-height: 430px;
-   width: 980px;
-   position: relative;
+  grid-column: 3 / span 3;
+  grid-row: 1 / span 1;
+  height: 825px;
+  width: 1145px;
+  position: relative;
+  left: 600px
  }
 
  .e{
-  grid-column: 3;
+  grid-column: 4;
   grid-row: 1  / span 1 ;
   position: relative;
   min-width: 420px;
-  max-height: 640px;
-  left: 105px;
+  max-height: 200px;
+  right: 105px;
+
 }
 
 .f{
@@ -122,32 +124,41 @@ height: 580px;
 }
 
 .g{
-  grid-column: 3 / span 3 ;
+  grid-column: 3 / span 3;
   grid-row: 2 / span 1;
-  bottom: 150px;
-  max-height: 400px;
-  width: 800px;
   position: relative;
+  left: 600px;
+  top: -260px;
+}
+.h{
+  grid-column: 4;
+  grid-row: 3 / span 1;
+  position: relative;
+  bottom: 1100px;
+  height: 220px;
+  right: 105px;;
 }
 
-div.a section {
+  div.a section {
   display: none;	
   grid-gap: 5px;
-  grid-template-columns: 10rem auto;	
-}
+  grid-template-columns: 10rem auto;
+ } 
 
-div.b section {	 
+
+ div.b section {	 
   grid-gap: 44px;
   position: relative;
   right: 10px;
-}
-div.c section {
+  
+} 
+ div.c section {
   display: none; 
   position: relative;
-}
+} 
 
 div.d section {
-    display: none;
+  display: none;
   position: relative;
 }
 div.e section {
@@ -164,7 +175,7 @@ list-style-type: none;
 margin: 0;
 padding: 0;
 width: 306px;
-height: 465px;
+height: 1000px;
 overflow: scroll;
 }
 
@@ -214,11 +225,12 @@ padding-bottom: 50px;
   position: relative;
   font-size: 14px;
   right:12px;
-  width: 365px;
-  height: 260px;
+  width: 960px;
+  height: 615px;
   overflow: scroll; 
   font-family:Georgia, 'Times New Roman', Times, serif;
   text-align: justify;
+  
 }
 
 .a span{
@@ -227,16 +239,16 @@ padding-bottom: 50px;
    font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
-.c section{
+/* .c section{
   position: relative;
   font-size: 14px;
   right:12px;
-  width: 335px;
-  height: 210px;
+  width: 960px;
+  height: 710px;
   overflow: scroll;
   font-family:Georgia, 'Times New Roman', Times, serif;
-  top: px;
-}
+  top: 3px;
+} */
 
 .c label{
   position: relative;
@@ -245,19 +257,19 @@ padding-bottom: 50px;
   font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
-.c span{
+/* .c span{
   position: relative;
   left: 180px;
   bottom: 27px; 
   font-size: 14px;
   font-family:Georgia, 'Times New Roman', Times, serif;
-}
+} */
 
 .d section{
   position: relative;
   right:1px;
-  width: 990px;
-  height: 480px;
+  width: 1155px;
+  height: 800px;
   overflow: scroll;
   left: 1px;
   top:10px;
@@ -272,10 +284,10 @@ max-width: 100px;
 
 #stockData td, #stockData th {
 border: 1px solid black;
-padding: 9px;
+padding: 49px;
 text-align: center; 
 font-size: 15px;
-width: 720px; 
+width: 120px; 
 }
 
 #stockData tr:nth-child(even){
@@ -296,7 +308,7 @@ transition: all 1.4s;
 
 #stockData th {
 padding-top: 2px;
-padding-bottom: 7px;
+padding-bottom: 2px;
 text-align: left;
 background-color: #4CAF50;
 color: white; 
@@ -304,7 +316,7 @@ font-size: 12px;
 color: #fff;
 line-height: 1.4;
 text-transform: uppercase;
-background-color: #36304a;
+background-color: #800000;
 }
 
 fieldset { 
@@ -505,23 +517,26 @@ background-color: transparent;
 text-decoration: underline;
 }
 
-.last  {
+.g  {
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 100%;
-  border: 1px solid #dddddd;
+  width: 1150px;
+
   text-align: left;
-  padding: 8px;
-  background-color: #dddddd;
+   padding: 21px;
+
 }
 
-.last td, .last th {
+.g td, .g th {
 
-  border: 1px solid #dddddd;
+  border: 1px solid #9b3c3c;
   text-align: left;
-  padding: 8px;
+  padding: 12px;
+  width: 300px;
+  position: relative;
+  bottom: 20px;
 }
 
-.last tr:nth-child(even) {
+.g tr:nth-child(even) {
   background-color: #dddddd; 
 }
