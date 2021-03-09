@@ -284,10 +284,12 @@ max-width: 100px;
 
 #stockData td, #stockData th {
 border: 1px solid black;
-padding: 49px;
+padding: 72px;
 text-align: center; 
 font-size: 15px;
 width: 120px; 
+
+
 }
 
 #stockData tr:nth-child(even){
