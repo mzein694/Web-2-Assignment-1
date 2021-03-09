@@ -373,7 +373,7 @@ function displayButtonViewChart() {
         document.querySelector("div.b ").style.visibility='hidden';
         document.querySelector("div.c ").style.visibility='hidden';
         document.querySelector("div.d ").style.visibility='hidden';
-        document.querySelector("div.last ").style.visibility='hidden';
+        document.querySelector("div.g ").style.visibility='hidden';
         document.querySelector("div.f ").style.visibility='visible';
         document.querySelector("div.e ").style.visibility='visible';
         document.querySelector("div.e section").style.display = "grid";
@@ -519,7 +519,7 @@ function displayButtonDefaultview() {
         document.querySelector("div.b ").style.visibility='visible';
         document.querySelector("div.c ").style.visibility='visible';
         document.querySelector("div.d ").style.visibility='visible';
-        document.querySelector("div.last ").style.visibility='visible';
+        document.querySelector("div.g ").style.visibility='visible';
         document.querySelector("div.f ").style.visibility='hidden';
         document.querySelector("div.e").style.visibility ='hidden';                     
     });
