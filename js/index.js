@@ -5,35 +5,30 @@ let closePrices =[];
 let volums =[];
 let x = [];
 
-let map ;
-let lat ;
-let lng;
+document.addEventListener("DOMContentLoaded",function(){   
+    const url='http://www.randyconnolly.com/funwebdev/3rd/api/stocks/companies.php';
 
-window.addEventListener("load",function(){   
-
-const url='http://www.randyconnolly.com/funwebdev/3rd/api/stocks/companies.php';
-let allLinks = document.getElementsByTagName("div");    
-for (let i = 0; i < allLinks.length-1; i++) {
-    let status = allLinks[i].className;
-    let spanTag = allLinks[i].firstElementChild;
-    if (status=='label'){  
-        spanTag.style.display = 'none';
-        allLinks[i].addEventListener("mouseover",function(){
-            setTimeout(function() {
-                spanTag.style.display = 'none';
-            }, 5000);
-        if (spanTag.style.display == 'none') {
-                spanTag.style.display = 'block';
-          }
-        });
-   }
-}
+    let links = document.getElementsByTagName("div");    
+    for (let i = 0; i < links.length-1; i++) {  
+        let position = links[i].className;
+        let spanTag = links[i].firstElementChild;
+        if (position == 'label'){  
+            spanTag.style.display = 'none';
+            links[i].addEventListener("mouseover",function(){
+                setTimeout(function() {
+                    spanTag.style.display = 'none';
+                }, 5000);
+            if (spanTag.style.display == 'none') {
+                    spanTag.style.display = 'block';
+            }
+            });
+        }
+    }
  
-//check if the load Storge    
+//checks for the load storage    
 let localData;
- 
 if (localStorage.getItem('companies') == null && localStorage.getItem('companies')!='') {
-      fetch(url) //fetching the url and see loadStorge has the JSON  or not 
+      fetch(url) //fetches the url to check loadStorge for JSON 
           .then(response => {
             return response.json();
            })
@@ -45,20 +40,19 @@ if (localStorage.getItem('companies') == null && localStorage.getItem('companies
           .catch(function (error) {
                 console.log(error)
            });
-} else {
+} 
+else {
     localData = localStorage.getItem('companies');
     displayList();
     
 }
     
-// Enable search on company Symbol
-//--------------------------------
+// Search for company Symbol
 const searchBox = document.querySelector('.search');
 searchBox.addEventListener('keyup', function() {
         let searchText = document.querySelector('.search').value;
         displayList(searchText);
 });
-
 document.querySelector("div.f ").style.visibility='hidden';
 document.querySelector("div.e ").style.visibility='hidden';
 displaySpeakButtoms();
@@ -66,19 +60,15 @@ displayButtonDefaultview();
 displayButtonViewChart();
   
             
-//-------------------------------------------------------------------
 // Functions definitions
-//-------------------------------------------------------------------
 function displayList(filter=''){
     let ul = document.getElementById("StockList");
     ul.innerHTML = "";
-    
     let companies = [];
     document.querySelector(".b section").style.display = "block";
     companies = JSON.parse(localData);
 
     // filter if require
-    //------------------
     if (filter!=''){
        let filterItems = (filter) => {
         return companies.filter(el => el.symbol.startsWith(filter));
@@ -100,7 +90,8 @@ function displayList(filter=''){
         let linkText = document.createTextNode(companies[i].symbol);
 
         lnk.appendChild(img); 
-        lnk.appendChild(linkText);// adding the symbol to the img
+        // adds the symbol to the img
+        lnk.appendChild(linkText);
         dv.className='myDiv';
         spn.appendChild(lnk);
         dv.appendChild(spn);
@@ -109,31 +100,26 @@ function displayList(filter=''){
         ul.appendChild(li);
         if (companies[i].symbol != null){
                 dv.addEventListener('click',function(){
-
                     getCompanyData(companies[i].symbol);
                     getCompanyDatachart(companies[i].symbol);
-                    
                 });
         }
     }
     
 }   
 
-//Passing the symbol to the url and see if the data is store in the localstorage  
+//Pass symbol to the url to check if the data is stored in the localstorage  
 function getCompanyData(cmpny){
-
- 
     let companyURL="http://www.randyconnolly.com/funwebdev/3rd/api/stocks/companies.php?symbol=" + cmpny;
-
     let companyLocalData= localStorage.getItem("["+cmpny+"]");
-
     if (companyLocalData==null || companyLocalData=='') {
-          
-           fetch(companyURL) // fetching the url
+            // fetching the url
+           fetch(companyURL) 
            .then(companyResponse => {
                return companyResponse.json();
             })
-            .then(companyData => { //if data isn't found in localstorage then adding the  data in the localstorage 
+            //if data isn't found in localstorage then adds the  data to localstorage 
+            .then(companyData => { 
                 localStorage.setItem("["+cmpny+"]",JSON.stringify(companyData));   
                 companyLocalData = localStorage.getItem("["+cmpny+"]");
                 console.log(companyLocalData)
@@ -142,25 +128,25 @@ function getCompanyData(cmpny){
             .catch(function (error) {
                 console.log(error)
         });
-    } else {
+    } 
+    else {
         companyLocalData = localStorage.getItem("["+cmpny+"]"); //Data is found
-   
         displayInfo(companyLocalData);
-        
     }
-    
 }
     
-// Display the symbol with its logo    
+// Display the symbol with its logo  
+let map ;
+let lat ;
+let lng;  
 function displayInfo(cmpny){   
-
     companyInfoData=JSON.parse(cmpny);
 
     document.querySelector("div.a section").style.display = "grid";
-    let imgC = document.getElementById("imgC"); 
-    imgC.src = './logos/' + ((companyInfoData.symbol != '') ? companyInfoData[0].symbol : companyInfoData.symbol) + '.svg';
-    imgC.className ='divImg';
-    document.getElementById("infoSymbol").innerHTML = companyInfoData[0].symbol// ((companyInfoData.symbol != '') ? companyInfoData[0].symbol : companyInfoData.symbol); 
+    let pic = document.getElementById("pic"); 
+    pic.src = './logos/' + ((companyInfoData.symbol != '') ? companyInfoData[0].symbol : companyInfoData.symbol) + '.svg';
+    pic.className ='divImg';
+    document.getElementById("infoSymbol").innerHTML = companyInfoData[0].symbol // ((companyInfoData.symbol != '') ? companyInfoData[0].symbol : companyInfoData.symbol); 
     document.getElementById("infocompanyName").innerHTML = ((companyInfoData.name != '') ? companyInfoData[0].name : companyInfoData.name);
     document.getElementById("infoexchange").innerHTML = ((companyInfoData.exchange != '') ? companyInfoData[0].exchange : companyInfoData.exchange);
     document.getElementById("infoindustry").innerHTML = ((companyInfoData.subindustry != '') ? companyInfoData[0].subindustry : companyInfoData.subindustry);
@@ -182,8 +168,8 @@ function displayInfo(cmpny){
     initMap();
     createMarker(map, lat, lng);
     Chart2(companyInfoData)
-    
 }
+
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: {
@@ -192,55 +178,47 @@ function initMap() {
         },
         zoom: 18
     });
-
 }
 
-  function createMarker(map, latitude, longitude, city) {
-        let stocksLatLong = {
-            lat: latitude,
-            lng: longitude
-        };
-        let marker = new google.maps.Marker({
-            position: stocksLatLong,
-            map: map
-        });
+function createMarker(map, latitude, longitude, city) {
+    let stocksLatLong = {
+        lat: latitude,
+        lng: longitude
+    };
+    let marker = new google.maps.Marker({
+        position: stocksLatLong,
+        map: map
+    });
+}   
 
-    }   
-
-             
-function getCompanyDatachart(cmpny){  //passing the symbol to the url and see if the data is store  in the localstorage   
+//passing the symbol to the url and see if the data is store  in the localstorage  
+function getCompanyDatachart(cmpny){   
     let companychartLocalData=localStorage.getItem(cmpny);
-   
     const companyChartURL="http://www.randyconnolly.com/funwebdev/3rd/api/stocks/history.php?symbol=" + cmpny ;
   
     if (companychartLocalData==null || companychartLocalData=='') {
-          
            fetch(companyChartURL)
            .then(companyCResponse => {
                return companyCResponse.json();
             })
-            .then(companyCData => { //if data isn't found in localstorage then adding the  data in the localstorage
-            
+            //if data isn't found in localstorage then adding the  data in the localstorage
+            .then(companyCData => { 
                 if (companyCData.length>0) {
                     localStorage.setItem(cmpny,JSON.stringify(companyCData));
                     companychartLocalData = localStorage.getItem(cmpny);
-
-                    
                 }
            })
             .catch(function (error) {
                console.log(error);
         });
-    } else { //Data found
-        //console.log(localStorage.getItem(cmpny)); 
+    } 
+    //If data is found 
+    else { 
         companychartLocalData = localStorage.getItem(cmpny);        
     }
-              
-    //console.log(companychartLocalData);
     if (companychartLocalData.length>0) {
         displaychartInfo(companychartLocalData);
     }
-
 }
   
 // Display the charts statictis 
@@ -248,11 +226,8 @@ function displaychartInfo(charts){
     document.querySelector("div.d  section").style.display = "grid";
     document.querySelector("div  #dchart").style.display = "grid";
     document.querySelector("div #btnViewChart").style.display = "grid";
-
     let companiescharts =[];
-    
     companiescharts=JSON.parse(charts);
-  
     let tbl = document.getElementById('stockData');
     tbl.innerHTML = "";
         
@@ -296,7 +271,6 @@ function displaychartInfo(charts){
     highCal =[];
     lowCalc =[];
     volumeCalc =[];
-
     closePrices =[];
     volums =[];
     x = [];
@@ -307,9 +281,7 @@ function displaychartInfo(charts){
         highCal.push(companiescharts[i].high);
         lowCalc.push(companiescharts[i].low);
         volumeCalc.push(companiescharts[i].volume);
-        
     }
-
     openCalc.sort(function(a, b){return b-a});
     closeCalc.sort(function(a, b){return b-a});
     lowCalc.sort(function(a, b){return b-a});
@@ -338,14 +310,13 @@ function displaychartInfo(charts){
     
 
     for (let i = 0; i < companiescharts.length; i++){
-     
-        // add row
+        // adds row
         (i==0) ? minClose=companiescharts[i]['close'] : console.log(''); 
         
         var tr = document.createElement("tr");
         tbl.appendChild(tr);
 
-        //add data items
+        //adding data items
         var td = document.createElement("td");
         td.appendChild(document.createTextNode(companiescharts[i]['date']));
         tr.appendChild(td);
@@ -379,7 +350,7 @@ function displaychartInfo(charts){
          totalVol = totalVol + companiescharts[i]['volume'];
     }
     
-    //calculating the information 
+    //Average, Min close and volume calculation 
     document.getElementById("averageClose").innerHTML = (avgClose/companiescharts.length); 
     document.getElementById("minimumClose").innerHTML = (minClose); 
     document.getElementById("averageVolume").innerHTML = (avgVol/companiescharts.length);
@@ -388,71 +359,63 @@ function displaychartInfo(charts){
 
 
 function average(nums) {
-   
     return nums.reduce((p,c,_,a) => p + c/a.length,0);
 }
 
 // Creating a buttom that change the view of the website 
 function displayButtonViewChart() {
     let btnViewChart = document.getElementById("btnViewChart");
-      let textbtn = document.createTextNode('View Chart');
-      btnViewChart.appendChild(textbtn);
-      btnViewChart.style.background = 'grey';
-      btnViewChart.style.width = '95px';
-      btnViewChart.style.height = '35px';
-      btnViewChart.style.borderRadius = "30px"
-      btnViewChart.addEventListener('click', function(){
-                    
+    let textbtn = document.createTextNode('View Chart');
+    btnViewChart.appendChild(textbtn);
+    btnViewChart.style.background = 'grey';
+    btnViewChart.style.width = '95px';
+    btnViewChart.style.height = '35px';
+    btnViewChart.style.borderRadius = "30px"
 
-              // when the buttom is clicked it hide a, b,c,d and display e and f
-                    document.querySelector("div.a ").style.visibility='hidden';
-                    document.querySelector("div.b ").style.visibility='hidden';
-                    document.querySelector("div.c ").style.visibility='hidden';
-                    document.querySelector("div.d ").style.visibility='hidden';
-                    document.querySelector("div.last ").style.visibility='hidden';
-                    document.querySelector("div.f ").style.visibility='visible';
-                    document.querySelector("div.e ").style.visibility='visible';
-                    document.querySelector("div.e section").style.display = "grid";
-                    document.querySelector("div.e section").style.display = "block";
-
-                    displayChart(closePrices,volums,x); // passing the value to draw the chart
-
-        });
+    btnViewChart.addEventListener('click', function(){
+        // when the buttom is clicked it hide a, b,c,d and display e and f
+        document.querySelector("div.a ").style.visibility='hidden';
+        document.querySelector("div.b ").style.visibility='hidden';
+        document.querySelector("div.c ").style.visibility='hidden';
+        document.querySelector("div.d ").style.visibility='hidden';
+        document.querySelector("div.last ").style.visibility='hidden';
+        document.querySelector("div.f ").style.visibility='visible';
+        document.querySelector("div.e ").style.visibility='visible';
+        document.querySelector("div.e section").style.display = "grid";
+        document.querySelector("div.e section").style.display = "block";
+        // passing the value to draw the chart
+        displayChart(closePrices,volums,x); 
+    });
     
 }
     
 //Having two clicked buttom to speck the content on th screen.    
 function displaySpeakButtoms() {
     let BtnCompanyNameSpeak = document.getElementById("BtnCompanyNameSpeak");
-     let textbtn = document.createTextNode('Speak');
-      BtnCompanyNameSpeak.appendChild(textbtn);
-
-     BtnCompanyNameSpeak.addEventListener("click",function(){
+    let textbtn = document.createTextNode('Speak');
+    BtnCompanyNameSpeak.appendChild(textbtn);
+    BtnCompanyNameSpeak.addEventListener("click",function(){
          speakText(selectedCompanayName);
-     });
+    });
          
-     let BtnCompanydescSpeak = document.getElementById("BtnCompanydescSpeak");
-     let textbtn2 = document.createTextNode('Speak');
-      BtnCompanydescSpeak.appendChild(textbtn2);
+    let BtnCompanydescSpeak = document.getElementById("BtnCompanydescSpeak");
+    let textbtn2 = document.createTextNode('Speak');
+    BtnCompanydescSpeak.appendChild(textbtn2);
     
-    
-     BtnCompanydescSpeak.addEventListener("click",function(){
-         speakText(selectedCompanayDesc);
-     });
+    BtnCompanydescSpeak.addEventListener("click",function(){
+        speakText(selectedCompanayDesc);
+    });
 }
 
-//SpeechSynthesis functiion     
+//Speak functiion     
 function speakText(txt){
-
     let msg = new SpeechSynthesisUtterance();
-
-        msg.text = txt;
-        window.speechSynthesis.speak(msg);
+    msg.text = txt;
+    window.speechSynthesis.speak(msg);
 }
    
-// Display the vlums and close prices and the date on the chart 
+// Displays the volumes, close prices and the date on the chart 
 function displayChart(closePrices,volums,x){
-    
     let dom = document.getElementById("myChart");
     let myChart = echarts.init(dom);
     let app = {};
@@ -508,14 +471,12 @@ function displayChart(closePrices,volums,x){
             }
         ]
     };
-    ;
     if (option && typeof option === "object") {
         myChart.setOption(option, true);
     }
 }
 
 function Chart2(companyInfo){
-    
     const contain = document.querySelector("#columns");
     const Chart2 = new Chart(contain, {
         type: "bar",
@@ -549,20 +510,20 @@ function Chart2(companyInfo){
 
 function displayButtonDefaultview() {
     let BtnDefalut = document.getElementById("BtnDefalut");
-      let textbtn = document.createTextNode('Close');
-      BtnDefalut.appendChild(textbtn);
-      BtnDefalut.style.background = 'grey';
-      BtnDefalut.style.width = '95px';
-      BtnDefalut.style.height = '35px';
-      BtnDefalut.style.borderRadius = "30px"
-      BtnDefalut.addEventListener('click', function(){
-                document.querySelector("div.a ").style.visibility='visible';
-                document.querySelector("div.b ").style.visibility='visible';
-                document.querySelector("div.c ").style.visibility='visible';
-                document.querySelector("div.d ").style.visibility='visible';
-                document.querySelector("div.last ").style.visibility='visible';
-                document.querySelector("div.f ").style.visibility='hidden';
-                document.querySelector("div.e").style.visibility ='hidden';                     
-        });
+    let textbtn = document.createTextNode('Close');
+    BtnDefalut.appendChild(textbtn);
+    BtnDefalut.style.background = 'grey';
+    BtnDefalut.style.width = '95px';
+    BtnDefalut.style.height = '35px';
+    BtnDefalut.style.borderRadius = "30px"
+    BtnDefalut.addEventListener('click', function(){
+        document.querySelector("div.a ").style.visibility='visible';
+        document.querySelector("div.b ").style.visibility='visible';
+        document.querySelector("div.c ").style.visibility='visible';
+        document.querySelector("div.d ").style.visibility='visible';
+        document.querySelector("div.last ").style.visibility='visible';
+        document.querySelector("div.f ").style.visibility='hidden';
+        document.querySelector("div.e").style.visibility ='hidden';                     
+    });
 }
 });
