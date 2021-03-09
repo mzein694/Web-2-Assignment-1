@@ -2,22 +2,24 @@ body {
   margin: 10px;
   margin-left: 10px;
   margin-right: 10px;
-  background-color: whitesmoke;
-  font-family:Apple Chancery, cursive;
+  background-color:lightblue;
+  font-family:Georgia, 'Times New Roman', Times, serif;
   font-size: 0.8rem;
   height: 720px;
 }
 
 .Header{
   margin: auto;
-  background-color: transparent;
+  margin-bottom: 1%;
+  background-color: lightpink;
+  outline-style: auto;
   border-radius: 0px;
   padding: 5px;
   font-size: 150%;
   text-align-last: center;
   /*text color */   
   color: black;
-  font-family:'Times New Roman', Times, serif, cursive;
+  font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
 
@@ -31,9 +33,10 @@ body {
 .tooltip .tooltiptext {
   visibility: hidden;
   width: 120px;
-  background-color:rgb(168, 167, 167);
+  background-color:coral;
   color:black;
   text-align: center;
+  outline-style: auto;
   border-radius: 2px;
   padding: 5px ;
 
@@ -51,13 +54,13 @@ body {
 display: grid;
 grid-gap: 10px;
 grid-template-columns: 20rem 25rem auto;
-color: #444;
+color: lightpink;
 height: 570px;
 
 }
 
 .box {
-background-color: #cdcdcd;
+background-color: lightpink;
 color: black;
 border-radius: 5px;
 padding: 20px;
@@ -75,44 +78,46 @@ height: 580px;
 }
 
 .a {
-  grid-column: 1  / span 2 ;
-  grid-row: 2  /  span 1 ;
+  grid-column: 1  / span 4 ;
+  grid-row: 2  /  span 3 ;
   width: 335px;
   position: relative;
-  bottom:570px;
+  bottom:630px;
   left: 342px;
-  max-height: 260px;
+  max-height: 400px;
 }
 .c {
- grid-column: 2 / span  2 ;
+ grid-column: 2 / span  3 ;
   grid-row: 1  /  span  ;
   max-width: 335px;
   position: relative;
-  bottom:560px;
+  bottom: 570px;
   left:12px;
-  max-height: 200px;
+  max-height: 700px;
 }
 
 .d {
    grid-column: 3 / span 3 ;
    grid-row: 1 / span 1;
-   max-height: 520px;
-   width: 800px;
+   max-height: 430px;
+   width: 980px;
    position: relative;
  }
  .last{
-    grid-column: 3 / span 3 ;
-    grid-row: 2 / span 1;
-    max-height: 520px;
+    background-color: lightpink;
+    grid-column: 3 / span 2 ;
+    grid-row: 2 / span 2;
+    bottom: 150px;
+    max-height: 400px;
     width: 800px;
     position: relative;
 }
 .e{
-  grid-column: 4 / span 1  ;
+  grid-column: 3;
   grid-row: 1  / span 1 ;
   position: relative;
   min-width: 420px;
-  max-height: 521px;
+  max-height: 640px;
   left: 105px;
 }
 .f{
@@ -200,7 +205,7 @@ transition: all 1s;
   
 }
 
-#imgC {
+#pic {
   
 display: block;
 max-width:250px;
@@ -219,13 +224,13 @@ padding-bottom: 50px;
   width: 365px;
   height: 260px;
   overflow: scroll; 
-  font-family:Apple Chancery, cursive;
+  font-family:Georgia, 'Times New Roman', Times, serif;
   text-align: justify;
 }
 .a span{
    position: relative;
    right: 20px;
-   font-family:Apple Chancery, cursive;
+   font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
 
@@ -236,21 +241,21 @@ padding-bottom: 50px;
   width: 335px;
   height: 210px;
   overflow: scroll;
-  font-family:Apple Chancery, cursive;
+  font-family:Georgia, 'Times New Roman', Times, serif;
   top: px;
 }
 .c label{
   position: relative;
   padding: px;
   font-size: 14px;
-  font-family:Apple Chancery, cursive;
+  font-family:Georgia, 'Times New Roman', Times, serif;
 }
 .c span{
   position: relative;
   left: 180px;
   bottom: 27px; 
   font-size: 14px;
-  font-family:Apple Chancery, cursive;
+  font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
 
@@ -262,11 +267,11 @@ padding-bottom: 50px;
   overflow: scroll;
   left: 1px;
   top:10px;
-  font-family:Apple Chancery, cursive;
+  font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
 #stockData {
-font-family:Apple Chancery, cursive;;
+font-family:Georgia, 'Times New Roman', Times, serif;;
 border-collapse: collapse;
 max-width: 100px; 
 }
@@ -312,13 +317,13 @@ background-color: #36304a;
 fieldset { 
   border: 0pt;
   font-size:17px;
-  font-family:Apple Chancery, cursive
+  font-family:Georgia, 'Times New Roman', Times, serif
 }
 
 legend
 { 
   font-weight: 700; 
-  font-family:Apple Chancery, cursive;
+  font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
 input {
@@ -327,7 +332,7 @@ input {
   border-radius: 5px;
   width: 100%;
   height: 2em;
-  font-family:Apple Chancery, cursive;
+  font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
 .box ul {
@@ -346,7 +351,7 @@ input {
 div #btnViewChart {
 
   display: none;
-  font-family:Apple Chancery, cursive;
+  font-family:Georgia, 'Times New Roman', Times, serif;
    /* references from https://tympanus.net/codrops/2012/09/13/button-switches-with-checkboxes-and-css3-fanciness/  */
   border-radius: 50%;
   background: #eaeaea;
@@ -365,7 +370,7 @@ div #btnViewChart {
   font-size:17px;
   position: relative;
   left: 24px;
-  font-family:Apple Chancery, cursive;
+  font-family:Georgia, 'Times New Roman', Times, serif;
    /* references from https://tympanus.net/codrops/2012/09/13/button-switches-with-checkboxes-and-css3-fanciness/  */
   border-radius: 50%;
   background: lightgrey;
@@ -386,7 +391,7 @@ div #btnViewChart {
   position: relative;
   left: 20px;
   top:3px;
-  font-family:Apple Chancery, cursive;
+  font-family:Georgia, 'Times New Roman', Times, serif;
    /* references from https://tympanus.net/codrops/2012/09/13/button-switches-with-checkboxes-and-css3-fanciness/  */
    border-radius: 50%;
   background-color: lightgrey;
@@ -397,50 +402,50 @@ div #btnViewChart {
       inset 0 5px 5px rgba(255,255,255,0.3);
 }
 
-#DivcChartCompanySymbol{
+#compSymbolChart{
   padding-bottom: 10px;
-   font-family:Apple Chancery, cursive;
+   font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
-#DivcChartCompanyName{
+#compNameChart{
   padding-bottom: 10px;
-       font-family:Apple Chancery, cursive;
+       font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
 
-#DivcChartCompanyDesc{
+#compDescChart{
   padding-bottom: 19px;
   text-align: justify;
-   font-family:Apple Chancery, cursive;
+   font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
-#DivcChartCompanySymbol label {
+#compSymbolChart label {
     font-size: 17px;
     position: relative; 
   
 }
 
-#DivcChartCompanySymbol span{
+#compSymbolChart span{
   font-size: 15px;
   position: relative;
   left:54px
 }
   
-#DivcChartCompanyName label{
+#compNameChart label{
      font-size: 18px;
   
 }
-#DivcChartCompanyName span{
+#compNameChart span{
      font-size: 15px;
      position: relative;
      left:9px;
 }
 
-#DivcChartCompanyDesc label{
+#compDescChart label{
      font-size: 18px;
 }
 
-#DivcChartCompanyDesc span{
+#compDescChart span{
     font-size: 14px;
     position: relative;
     left:2px;
@@ -451,7 +456,7 @@ div #btnViewChart {
   left: 120px;  
   padding-top: 13px;
   padding-bottom: 33px;
-  font-family:Apple Chancery, cursive;
+  font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
 #calculateinfo {
@@ -468,7 +473,7 @@ div #btnViewChart {
   position: relative;
   bottom: 3px;
   font-size:15px;
-  font-family:Apple Chancery, cursive;
+  font-family:Georgia, 'Times New Roman', Times, serif;
   
 }
 
@@ -479,7 +484,7 @@ div #btnViewChart {
   left: 160px;  
   bottom: 53px;
   font-size:15px;
-  font-family:Apple Chancery, cursive;
+  font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
 #myChart{
@@ -494,7 +499,7 @@ div #btnViewChart {
 }
 
 #BtnDefalut{
-  font-family:Apple Chancery, cursive;
+  font-family:Georgia, 'Times New Roman', Times, serif;
   text-align: center;
   float: right;
   font-size:15px;
