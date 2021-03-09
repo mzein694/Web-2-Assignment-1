@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded",function(){   
-    const url='http://www.randyconnolly.com/funwebdev/3rd/api/stocks/companies.php';
+    const url='https://www.randyconnolly.com/funwebdev/3rd/api/stocks/companies.php';
 
     let links = document.getElementsByTagName("div");    
     for (let i = 0; i < links.length-1; i++) {  
@@ -105,7 +105,7 @@ let currentSelectedSymbol='';
 let selectedCompanayName='';
 let selectedCompanayDesc='';
 function getCompanyData(cmpny){
-    let companyURL="http://www.randyconnolly.com/funwebdev/3rd/api/stocks/companies.php?symbol=" + cmpny;
+    let companyURL="https://www.randyconnolly.com/funwebdev/3rd/api/stocks/companies.php?symbol=" + cmpny;
     let companyLocalData= localStorage.getItem("["+cmpny+"]");
     if (companyLocalData==null || companyLocalData=='') {
             // fetching the url
@@ -189,7 +189,7 @@ function createMarker(map, latitude, longitude, city) {
 //passing the symbol to the url and see if the data is store  in the localstorage  
 function getCompanyDatachart(cmpny){   
     let companychartLocalData=localStorage.getItem(cmpny);
-    const companyChartURL="http://www.randyconnolly.com/funwebdev/3rd/api/stocks/history.php?symbol=" + cmpny ;
+    const companyChartURL="https://www.randyconnolly.com/funwebdev/3rd/api/stocks/history.php?symbol=" + cmpny ;
   
     if (companychartLocalData==null || companychartLocalData=='') {
            fetch(companyChartURL)
