@@ -4,10 +4,8 @@
    <meta charset="utf-8"/>  
     <title>COMP 3512 Assig1</title> 
     <title>Mohamed Zeineldin, Arham Nawasir</title>
-     
     
     <link rel="stylesheet" href="./css/index.css"> 
-
 
 </head>
 
@@ -21,13 +19,10 @@
             </span>
         </div>
     </header>
-
-
 <div class="Header">
-   <label><h1>Stock Market Analysis</h1></label> 
 </div>
     
-   <main class="container">
+<main class="container">
   <div class="box a">
       <section>
           <img id=imgC>
@@ -60,18 +55,22 @@
                                         
       </section>  
   </div>
+
   <div class="box b">
-      
-      <section> 
-        <fieldset>
-            <legend>Autocomplete Using Fetch </legend>
-            <input type="text" class="search" placeholder="Type for matching companies" list="filterList">
-            <datalist id="filterList">
-            </datalist>
-        </fieldset>
-        <ul id="StockList"></ul>        
-      </section>  	
-  </div>  
+
+    <section> 
+      <fieldset>
+          <legend>List of companies </legend>
+          <label for="filter">Filter:</label>
+          <input type="text" class="search" placeholder="Type for matching companies" list="filterList">
+          <datalist id="filterList">
+          </datalist> 
+          <button type="submit" form="" value="Go">Go</button>
+          <button type="reset" form="" value="clear">Clear</button>
+      </fieldset>
+      <ul id="StockList"></ul>
+    </section>
+</div>
   
   <div class="box c" id="map" style="height: 300px;"></div>
 
@@ -86,8 +85,8 @@
                     <th>Date</th>
                     <th>Open</th>
                     <th>Close</th>
-                    <th>High</th>
                     <th>Low</th>
+                    <th>High</th>
                     <th>Volume</th>
                   </tr>
                 </table>
@@ -113,37 +112,44 @@
                             <Button type="Speak" id="BtnCompanydescSpeak">
                       </span>
                  </div>
-                        
-                     <div id="calculateinfo">
-                         
-                         <label id="title"> Monthly Summary Data: </label>
-                          <label>Average Close:</label>
-                          <span id="averageClose"></span>          
 
-                          <label>Minimum Close:</label>
-                          <span id="minimumClose"></span>          
-
-                          <label>Average Volume:</label>
-                          <span id="averageVolume"></span>       
-
-                          <label>Total Volume:</label>
-                          <span id="totalVolume"></span>   
-                     </div>
                      <span >
                             <Button type="Speak" id="BtnDefalut">
                      </span>
             </section>
         </div>       
+
+        <div class= "box last">
+            <div id="calculateinfo">
+                         
+                <label id="title"> Monthly Summary Data: </label>
+                 
+                 <span id="averageClose"></span>          
+
+                 <label>Minimum Close:</label>
+                 <span id="minimumClose"></span>          
+
+                 <label>Average Volume:</label>
+                 <span id="averageVolume"></span>       
+
+                 <label>Total Volume:</label>
+                 <span id="totalVolume"></span>   
+            </div>
+
+        </div>
+
   <div class="box f">
             <section>
                 <div id="myChart" ></div>   
                    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.8.0/extension/bmap.min.js"></script>
                    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.6.0/echarts-en.min.js"></script>
                    
-                
+            
                 
             </section>   
-        </div>       
+        </div>
+        
+        
   <script type="text/javascript" src="./js/index.js"></script>
   <script async
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAp2b_XrHqfJyPZes-fcY5RAEmIkpcSV6E&callback=initMap">
