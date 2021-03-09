@@ -71,12 +71,6 @@ display: block;
  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 0, 0, 0.2) inset;
 }
 
-.b {
-grid-column: 1 / span 1;
-grid-row: 1  /  span 1;
-height: 580px;
-}
-
 .a {
   grid-column: 1  / span 4 ;
   grid-row: 2  /  span 3 ;
@@ -86,6 +80,13 @@ height: 580px;
   left: 342px;
   max-height: 400px;
 }
+
+.b {
+grid-column: 1 / span 1;
+grid-row: 1  /  span 1;
+height: 580px;
+}
+
 .c {
  grid-column: 2 / span  3 ;
   grid-row: 1  /  span  ;
@@ -103,16 +104,8 @@ height: 580px;
    width: 980px;
    position: relative;
  }
- .last{
-    background-color: lightpink;
-    grid-column: 3 / span 2 ;
-    grid-row: 2 / span 2;
-    bottom: 150px;
-    max-height: 400px;
-    width: 800px;
-    position: relative;
-}
-.e{
+
+ .e{
   grid-column: 3;
   grid-row: 1  / span 1 ;
   position: relative;
@@ -120,11 +113,21 @@ height: 580px;
   max-height: 640px;
   left: 105px;
 }
+
 .f{
   grid-column: 1 / 1;
   grid-row: 1 / 1;
   width: 800px;
   height: 520px;
+}
+
+.g{
+  grid-column: 3 / span 3 ;
+  grid-row: 2 / span 1;
+  bottom: 150px;
+  max-height: 400px;
+  width: 800px;
+  position: relative;
 }
 
 div.a section {
@@ -166,18 +169,16 @@ overflow: scroll;
 }
 
 .myDiv {
-
 font-size: 0.8rem;
 position: relative;
 font-feature-settings: normal;
 border: 2px;
 height: auto;
 border-radius: 10px;
-/*border-bottom-style:ridge;
-border-bottom-right-radius: 20px;*/
 border-spacing:20px; 
 transition: all 1s;
 }
+
 .divImg {
 display: block;
 width: 180px;
@@ -189,24 +190,17 @@ top:3px;
 
 
 .myDiv:hover  {
-  
 background-color: #ffffff;
 border: none;
 color: black;
 padding: 10px 10px;
 opacity: 0.1;
 transition: .3s;    
-  
-/*  transition: .9s ease; */
 opacity: 1;
 transition: all 1s;
-  
-  
-  
 }
 
 #pic {
-  
 display: block;
 max-width:250px;
 max-height:50px;
@@ -214,7 +208,6 @@ position: relative;
 left: 90px;
 bottom:40px;
 padding-bottom: 50px;
-
 }
 
 .a section{
@@ -227,12 +220,12 @@ padding-bottom: 50px;
   font-family:Georgia, 'Times New Roman', Times, serif;
   text-align: justify;
 }
+
 .a span{
    position: relative;
    right: 20px;
    font-family:Georgia, 'Times New Roman', Times, serif;
 }
-
 
 .c section{
   position: relative;
@@ -244,12 +237,14 @@ padding-bottom: 50px;
   font-family:Georgia, 'Times New Roman', Times, serif;
   top: px;
 }
+
 .c label{
   position: relative;
   padding: px;
   font-size: 14px;
   font-family:Georgia, 'Times New Roman', Times, serif;
 }
+
 .c span{
   position: relative;
   left: 180px;
@@ -257,7 +252,6 @@ padding-bottom: 50px;
   font-size: 14px;
   font-family:Georgia, 'Times New Roman', Times, serif;
 }
-
 
 .d section{
   position: relative;
@@ -288,10 +282,10 @@ width: 720px;
   background-color: #f2f2f2;
 }
 
-#stockData tr:hover 
-{
+#stockData tr:hover{
   background-color: #ddd;
 }
+
 a {
 margin: 0px;
 transition: all 1.4s;
@@ -313,15 +307,13 @@ text-transform: uppercase;
 background-color: #36304a;
 }
 
-
 fieldset { 
   border: 0pt;
   font-size:17px;
   font-family:Georgia, 'Times New Roman', Times, serif
 }
 
-legend
-{ 
+legend{ 
   font-weight: 700; 
   font-family:Georgia, 'Times New Roman', Times, serif;
 }
@@ -349,18 +341,8 @@ input {
 }
 
 div #btnViewChart {
-
   display: none;
   font-family:Georgia, 'Times New Roman', Times, serif;
-   /* references from https://tympanus.net/codrops/2012/09/13/button-switches-with-checkboxes-and-css3-fanciness/  */
-  border-radius: 50%;
-  background: #eaeaea;
-  box-shadow: 
-      0 3px 5px rgba(0,0,0,0.25),
-      inset 0 1px 0 rgba(255,255,255,0.3),
-      inset 0 -5px 5px rgba(100,100,100,0.1),
-      inset 0 5px 5px rgba(255,255,255,0.3);
-  
 }
 
 #BtnCompanyNameSpeak{
@@ -371,14 +353,6 @@ div #btnViewChart {
   position: relative;
   left: 24px;
   font-family:Georgia, 'Times New Roman', Times, serif;
-   /* references from https://tympanus.net/codrops/2012/09/13/button-switches-with-checkboxes-and-css3-fanciness/  */
-  border-radius: 50%;
-  background: lightgrey;
-  box-shadow: 
-      0 3px 5px rgba(0,0,0,0.25),
-      inset 0 1px 0 rgba(255,255,255,0.3),
-      inset 0 -5px 5px rgba(100,100,100,0.1),
-      inset 0 5px 5px rgba(255,255,255,0.3);
 }
 
 #BtnCompanydescSpeak{
@@ -392,14 +366,6 @@ div #btnViewChart {
   left: 20px;
   top:3px;
   font-family:Georgia, 'Times New Roman', Times, serif;
-   /* references from https://tympanus.net/codrops/2012/09/13/button-switches-with-checkboxes-and-css3-fanciness/  */
-   border-radius: 50%;
-  background-color: lightgrey;
-  box-shadow: 
-      0 3px 5px rgba(0,0,0,0.25),
-      inset 0 1px 0 rgba(255,255,255,0.3),
-      inset 0 -5px 5px rgba(100,100,100,0.1),
-      inset 0 5px 5px rgba(255,255,255,0.3);
 }
 
 #compSymbolChart{
