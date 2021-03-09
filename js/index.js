@@ -181,7 +181,7 @@ function displayInfo(cmpny){
 
     initMap();
     createMarker(map, lat, lng);
-    barChart(companyInfoData)
+    Chart2(companyInfoData)
     
 }
 function initMap() {
