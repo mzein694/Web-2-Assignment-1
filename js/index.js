@@ -164,6 +164,7 @@ function displayInfo(cmpny){
     initMap();
     createMarker(map, lat, lng);
     Chart2(companyInfoData)
+    finicalTable(companyInfoData[0].financials)
 }
 
 function initMap() {
@@ -285,24 +286,24 @@ function displaychartInfo(charts){
     volumeCalc.sort(function(a, b){return b-a});
 
     document.getElementById("averageOpen").innerHTML = average(openCalc)
-    document.getElementById("minimumOpen").innerHTML = openCalc.slice(-1)[0]
-    document.getElementById("maxOpen").innerHTML = openCalc[0]
+    document.getElementById("minimumOpen").innerHTML = parseInt(openCalc.slice(-1)[0])
+    document.getElementById("maxOpen").innerHTML = parseInt(openCalc[0])
 
-    document.getElementById("averageClose").innerHTML = average(closeCalc)
-    document.getElementById("minimumClose").innerHTML = closeCalc.slice(-1)[0]
-    document.getElementById("maxClose").innerHTML = closeCalc[0]
+    document.getElementById("averageclose").innerHTML = average(closeCalc)
+    document.getElementById("minimumClose").innerHTML = parseInt(closeCalc.slice(-1)[0])
+    document.getElementById("maxClose").innerHTML = parseInt(closeCalc[0])
 
     document.getElementById("averagelow").innerHTML = average(lowCalc)
-    document.getElementById("minimumLow").innerHTML = lowCalc.slice(-1)[0]
-    document.getElementById("maxLow").innerHTML = lowCalc[0]
+    document.getElementById("minimumLow").innerHTML = parseInt(lowCalc.slice(-1)[0])
+    document.getElementById("maxLow").innerHTML = parseInt(lowCalc[0])
     
     document.getElementById("averageHigh").innerHTML = average(highCal)
-    document.getElementById("minimumHigh").innerHTML = highCal.slice(-1)[0]
-    document.getElementById("maxHigh").innerHTML = highCal[0]
+    document.getElementById("minimumHigh").innerHTML = parseInt(highCal.slice(-1)[0])
+    document.getElementById("maxHigh").innerHTML = parseInt(highCal[0])
 
     document.getElementById("averageVolume").innerHTML = average(volumeCalc)
-    document.getElementById("minimumVolume").innerHTML = volumeCalc.slice(-1)[0]
-    document.getElementById("maxVolume").innerHTML = volumeCalc[0]
+    document.getElementById("minimumVolume").innerHTML = parseInt(volumeCalc.slice(-1)[0])
+    document.getElementById("maxVolume").innerHTML = parseInt(volumeCalc[0])
     
 
     for (let i = 0; i < companiescharts.length; i++){
@@ -319,43 +320,119 @@ function displaychartInfo(charts){
         x.push(companiescharts[i]['date']);
 
         var td = document.createElement("td");
-        td.appendChild(document.createTextNode(companiescharts[i]['open']));
+        td.appendChild(document.createTextNode(parseInt(companiescharts[i]['open'])));
         tr.appendChild(td);
         
         var td = document.createElement("td");
-        td.appendChild(document.createTextNode(companiescharts[i]['high']));
+        td.appendChild(document.createTextNode(parseInt(companiescharts[i]['high'])));
         tr.appendChild(td);
         
         var td = document.createElement("td");
-        td.appendChild(document.createTextNode(companiescharts[i]['low']));
+        td.appendChild(document.createTextNode(parseInt(companiescharts[i]['low'])));
         tr.appendChild(td);
         
         var td = document.createElement("td");
-        td.appendChild(document.createTextNode(companiescharts[i]['close']));
+        td.appendChild(document.createTextNode(parseInt(companiescharts[i]['close'])));
         tr.appendChild(td);
         closePrices.push(companiescharts[i]['close']);
         
         var td = document.createElement("td");
-        td.appendChild(document.createTextNode(companiescharts[i]['volume']));
+        td.appendChild(document.createTextNode(parseInt(companiescharts[i]['volume'])));
         tr.appendChild(td);
         volums.push(companiescharts[i]['volume']/10000);
 
          avgClose = avgClose + companiescharts[i]['close'];
          (companiescharts[i]['close'] < minClose) ? minClose = companiescharts[i]['close'] : '';
          avgVol = avgVol + companiescharts[i]['volume'];
-         totalVol = totalVol + companiescharts[i]['volume'];
+        // totalVol = totalVol + companiescharts[i]['volume'];
     }
     
     //Average, Min close and volume calculation 
     document.getElementById("averageClose").innerHTML = (avgClose/companiescharts.length); 
     document.getElementById("minimumClose").innerHTML = (minClose); 
     document.getElementById("averageVolume").innerHTML = (avgVol/companiescharts.length);
-    document.getElementById("totalVolume").innerHTML = (totalVol);
+    //document.getElementById("totalVolume").innerHTML = (totalVol);
+}
+
+function finicalTable(finData){
+    console.log(finData)
+    let tbl = document.getElementById('finicalData');
+    tbl.innerHTML = "";
+        
+    var tr = document.createElement("tr");
+    tbl.appendChild(tr);
+
+    //add data items
+    var th = document.createElement("th");
+    th.appendChild(document.createTextNode("Date"));
+    tr.appendChild(th);
+
+    var th = document.createElement("th");
+    th.appendChild(document.createTextNode("Open"));
+    tr.appendChild(th);
+
+    var th = document.createElement("th");
+    th.appendChild(document.createTextNode("High"));
+    tr.appendChild(th);
+
+    var th = document.createElement("th");
+    th.appendChild(document.createTextNode("Low"));
+    tr.appendChild(th);
+
+    var th = document.createElement("th");
+    th.appendChild(document.createTextNode("Close"));
+    tr.appendChild(th);
+
+    var th = document.createElement("th");
+    th.appendChild(document.createTextNode("Volume"));
+    tr.appendChild(th);
+
+    for (let i = 0; i < finData.length; i++){
+        // adds row
+        
+        var tr = document.createElement("tr");
+        tbl.appendChild(tr);
+
+        //adding data items
+        var td = document.createElement("td");
+        td.appendChild(document.createTextNode(companiescharts[i]['assets']));
+        tr.appendChild(td);
+        x.push(companiescharts[i]['date']);
+
+        var td = document.createElement("td");
+        td.appendChild(document.createTextNode(companiescharts[i]['earnings']));
+        tr.appendChild(td);
+        
+        var td = document.createElement("td");
+        td.appendChild(document.createTextNode(companiescharts[i]['liabilities']));
+        tr.appendChild(td);
+        
+        var td = document.createElement("td");
+        td.appendChild(document.createTextNode(companiescharts[i]['revenue']));
+        tr.appendChild(td);
+        
+        var td = document.createElement("td");
+        td.appendChild(document.createTextNode(companiescharts[i]['years']));
+        tr.appendChild(td);
+        
+        
+
+    }
+
 }
 
 
 function average(nums) {
-    return nums.reduce((p,c,_,a) => p + c/a.length,0);
+    //console.log(nums);
+    var avg =0.0;
+    for (var i=0; i<nums.length; i++){
+        avg += parseFloat(nums[i]);
+    }
+    //console.log(avg + " <===> " + nums.length);
+    console.log(avg / nums.length);
+    
+    return (parseInt(avg / nums.length));
+    // nums.reduce((p,c,_,a) => p + c/a.length,0);
 }
 
 // Creating a buttom that change the view of the website 
