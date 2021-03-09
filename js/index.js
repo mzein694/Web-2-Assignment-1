@@ -10,7 +10,7 @@ let lat ;
 let lng;
 
 window.addEventListener("load",function(){   
-
+    
 const url='https://www.randyconnolly.com/funwebdev/3rd/api/stocks/companies.php';
 let allLinks = document.getElementsByTagName("div");    
 for (let i = 0; i < allLinks.length-1; i++) {
