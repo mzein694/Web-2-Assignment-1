@@ -10,7 +10,7 @@ let lat ;
 let lng;
 
 window.addEventListener("load",function(){   
-    
+
 const url='https://www.randyconnolly.com/funwebdev/3rd/api/stocks/companies.php';
 let allLinks = document.getElementsByTagName("div");    
 for (let i = 0; i < allLinks.length-1; i++) {
@@ -109,9 +109,7 @@ function displayList(filter=''){
         ul.appendChild(li);
         if (companies[i].symbol != null){
                 dv.addEventListener('click',function(){
-                   // console.log(companies[i].symbol)
-                   //console.log(companies[i]);
-                    //liClick(companies[i]);
+
                     getCompanyData(companies[i].symbol);
                     getCompanyDatachart(companies[i].symbol);
                     
@@ -126,7 +124,7 @@ function getCompanyData(cmpny){
 
  
     let companyURL="https://www.randyconnolly.com/funwebdev/3rd/api/stocks/companies.php?symbol=" + cmpny;
-   // console.log(companyURL)
+
     let companyLocalData= localStorage.getItem("["+cmpny+"]");
 
     if (companyLocalData==null || companyLocalData=='') {
@@ -145,19 +143,19 @@ function getCompanyData(cmpny){
                 console.log(error)
         });
     } else {
-       // console.log(companyLocalData)
         companyLocalData = localStorage.getItem("["+cmpny+"]"); //Data is found
    
         displayInfo(companyLocalData);
+        
     }
     
 }
     
 // Display the symbol with its logo    
 function displayInfo(cmpny){   
-    console.log(cmpny)
+
     companyInfoData=JSON.parse(cmpny);
-    console.log(companyInfoData)
+
     document.querySelector("div.a section").style.display = "grid";
     let imgC = document.getElementById("imgC"); 
     imgC.src = './logos/' + ((companyInfoData.symbol != '') ? companyInfoData[0].symbol : companyInfoData.symbol) + '.svg';
@@ -177,15 +175,13 @@ function displayInfo(cmpny){
     document.getElementById("chartCompanyDesc").innerHTML =((companyInfoData.website != '') ?  companyInfoData[0].description : companyInfoData.description);
     selectedCompanayName=((companyInfoData.name != '') ? companyInfoData[0].name : companyInfoData.name);
     selectedCompanayDesc=((companyInfoData.website != '') ?  companyInfoData[0].description : companyInfoData.description);
-
-     //console.log(companyInfoData)  
      
     lat = ((companyInfoData.latitude != '') ? companyInfoData[0].latitude : companyInfoData.latitude);
     lng = ((companyInfoData.longitude != '') ? companyInfoData[0].longitude : companyInfoData.longitude);
 
-    //console.log(lat + lng)
     initMap();
     createMarker(map, lat, lng);
+    barChart(companyInfoData)
     
 }
 function initMap() {
@@ -206,12 +202,10 @@ function initMap() {
         };
         let marker = new google.maps.Marker({
             position: stocksLatLong,
-            //title: city,
             map: map
         });
 
     }   
-
 
              
 function getCompanyDatachart(cmpny){  //passing the symbol to the url and see if the data is store  in the localstorage   
@@ -238,11 +232,11 @@ function getCompanyDatachart(cmpny){  //passing the symbol to the url and see if
                console.log(error);
         });
     } else { //Data found
-         
+        //console.log(localStorage.getItem(cmpny)); 
         companychartLocalData = localStorage.getItem(cmpny);        
     }
-    console.log("Loaded...........");                
-    
+              
+    //console.log(companychartLocalData);
     if (companychartLocalData.length>0) {
         displaychartInfo(companychartLocalData);
     }
@@ -297,10 +291,52 @@ function displaychartInfo(charts){
     var totalVol=0;
 
     //arrays for the charts
+    openCalc =[];
+    closeCalc =[];
+    highCal =[];
+    lowCalc =[];
+    volumeCalc =[];
+
     closePrices =[];
     volums =[];
     x = [];
-   
+
+    for (let i = 0; i < companiescharts.length; i++){
+        openCalc.push(companiescharts[i].open);
+        closeCalc.push(companiescharts[i].close);
+        highCal.push(companiescharts[i].high);
+        lowCalc.push(companiescharts[i].low);
+        volumeCalc.push(companiescharts[i].volume);
+        
+    }
+
+    openCalc.sort(function(a, b){return b-a});
+    closeCalc.sort(function(a, b){return b-a});
+    lowCalc.sort(function(a, b){return b-a});
+    highCal.sort(function(a, b){return b-a});
+    volumeCalc.sort(function(a, b){return b-a});
+
+    document.getElementById("averageOpen").innerHTML = average(openCalc)
+    document.getElementById("minimumOpen").innerHTML = openCalc.slice(-1)[0]
+    document.getElementById("maxOpen").innerHTML = openCalc[0]
+
+    document.getElementById("averageClose").innerHTML = average(closeCalc)
+    document.getElementById("minimumClose").innerHTML = closeCalc.slice(-1)[0]
+    document.getElementById("maxClose").innerHTML = closeCalc[0]
+
+    document.getElementById("averagelow").innerHTML = average(lowCalc)
+    document.getElementById("minimumLow").innerHTML = lowCalc.slice(-1)[0]
+    document.getElementById("maxLow").innerHTML = lowCalc[0]
+    
+    document.getElementById("averageHigh").innerHTML = average(highCal)
+    document.getElementById("minimumHigh").innerHTML = highCal.slice(-1)[0]
+    document.getElementById("maxHigh").innerHTML = highCal[0]
+
+    document.getElementById("averageVolume").innerHTML = average(volumeCalc)
+    document.getElementById("minimumVolume").innerHTML = volumeCalc.slice(-1)[0]
+    document.getElementById("maxVolume").innerHTML = volumeCalc[0]
+    
+
     for (let i = 0; i < companiescharts.length; i++){
      
         // add row
@@ -350,6 +386,12 @@ function displaychartInfo(charts){
     document.getElementById("totalVolume").innerHTML = (totalVol);
 }
 
+
+function average(nums) {
+   
+    return nums.reduce((p,c,_,a) => p + c/a.length,0);
+}
+
 // Creating a buttom that change the view of the website 
 function displayButtonViewChart() {
     let btnViewChart = document.getElementById("btnViewChart");
@@ -367,6 +409,7 @@ function displayButtonViewChart() {
                     document.querySelector("div.b ").style.visibility='hidden';
                     document.querySelector("div.c ").style.visibility='hidden';
                     document.querySelector("div.d ").style.visibility='hidden';
+                    document.querySelector("div.last ").style.visibility='hidden';
                     document.querySelector("div.f ").style.visibility='visible';
                     document.querySelector("div.e ").style.visibility='visible';
                     document.querySelector("div.e section").style.display = "grid";
@@ -470,7 +513,40 @@ function displayChart(closePrices,volums,x){
         myChart.setOption(option, true);
     }
 }
+
+function Chart2(companyInfo){
     
+    const contain = document.querySelector("#columns");
+    const Chart2 = new Chart(contain, {
+        type: "bar",
+        data: {
+            labels: companyInfo[0].financials.years,
+            datasets: [
+                {
+                    label: "Revenue",
+                    backgroundColor: "#0000FF",
+                    data: companyInfo[0].financials.revenue
+                },
+                {
+                    label: "Earnings",
+                    backgroundColor: "#008000",
+                    data: companyInfo[0].financials.earnings
+                },
+                {
+                    label: "Assets",
+                    backgroundColor: "#FFFF00",
+                    data: companyInfo[0].financials.assets
+                },
+                {
+                    label: "Liabilities",
+                    backgroundColor: "#FF0000",
+                    data: companyInfo[0].financials.liabilities
+                }
+            ]
+        }
+    });
+}
+
 function displayButtonDefaultview() {
     let BtnDefalut = document.getElementById("BtnDefalut");
       let textbtn = document.createTextNode('Close');
@@ -484,9 +560,9 @@ function displayButtonDefaultview() {
                 document.querySelector("div.b ").style.visibility='visible';
                 document.querySelector("div.c ").style.visibility='visible';
                 document.querySelector("div.d ").style.visibility='visible';
+                document.querySelector("div.last ").style.visibility='visible';
                 document.querySelector("div.f ").style.visibility='hidden';
                 document.querySelector("div.e").style.visibility ='hidden';                     
         });
 }
-    
 });
