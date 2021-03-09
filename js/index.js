@@ -1,25 +1,18 @@
-let currentSelectedSymbol='';
-let selectedCompanayName='';
-let selectedCompanayDesc='';
-let closePrices =[];
-let volums =[];
-let x = [];
-
 document.addEventListener("DOMContentLoaded",function(){   
     const url='http://www.randyconnolly.com/funwebdev/3rd/api/stocks/companies.php';
 
     let links = document.getElementsByTagName("div");    
     for (let i = 0; i < links.length-1; i++) {  
         let position = links[i].className;
-        let spanTag = links[i].firstElementChild;
+        let sp = links[i].firstElementChild;
         if (position == 'label'){  
-            spanTag.style.display = 'none';
+            sp.style.display = 'none';
             links[i].addEventListener("mouseover",function(){
                 setTimeout(function() {
-                    spanTag.style.display = 'none';
+                    sp.style.display = 'none';
                 }, 5000);
-            if (spanTag.style.display == 'none') {
-                    spanTag.style.display = 'block';
+            if (sp.style.display == 'none') {
+                    sp.style.display = 'block';
             }
             });
         }
@@ -28,23 +21,22 @@ document.addEventListener("DOMContentLoaded",function(){
 //checks for the load storage    
 let localData;
 if (localStorage.getItem('companies') == null && localStorage.getItem('companies')!='') {
-      fetch(url) //fetches the url to check loadStorge for JSON 
-          .then(response => {
+    fetch(url) //fetches the url to check loadStorge for JSON 
+        .then(response => {
             return response.json();
-           })
-          .then(data => {
-          localStorage.setItem('companies',JSON.stringify(data));
-          localData = localStorage.getItem('companies');
-          displayList();
-          })
-          .catch(function (error) {
-                console.log(error)
-           });
+        })
+        .then(data => {
+            localStorage.setItem('companies',JSON.stringify(data));
+            localData = localStorage.getItem('companies');
+            displayList();
+        })
+        .catch(function (error) {
+            console.log(error)
+        });
 } 
 else {
     localData = localStorage.getItem('companies');
     displayList();
-    
 }
     
 // Search for company Symbol
@@ -68,12 +60,12 @@ function displayList(filter=''){
     document.querySelector(".b section").style.display = "block";
     companies = JSON.parse(localData);
 
-    // filter if require
+    // perform filter if it is needed
     if (filter!=''){
-       let filterItems = (filter) => {
-        return companies.filter(el => el.symbol.startsWith(filter));
+        let filterItems = (filter) => {
+            return companies.filter(el => el.symbol.startsWith(filter));
         };
-            companies= filterItems(filter);
+        companies= filterItems(filter);
     }
     
     // creating the img and its logo 
@@ -109,6 +101,9 @@ function displayList(filter=''){
 }   
 
 //Pass symbol to the url to check if the data is stored in the localstorage  
+let currentSelectedSymbol='';
+let selectedCompanayName='';
+let selectedCompanayDesc='';
 function getCompanyData(cmpny){
     let companyURL="http://www.randyconnolly.com/funwebdev/3rd/api/stocks/companies.php?symbol=" + cmpny;
     let companyLocalData= localStorage.getItem("["+cmpny+"]");
@@ -415,6 +410,9 @@ function speakText(txt){
 }
    
 // Displays the volumes, close prices and the date on the chart 
+let closePrices =[];
+let volums =[];
+let x = [];
 function displayChart(closePrices,volums,x){
     let dom = document.getElementById("myChart");
     let myChart = echarts.init(dom);
