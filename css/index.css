@@ -534,3 +534,23 @@ background-color: transparent;
 text-decoration: underline;
 }
 
+.last  {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  background-color: #dddddd;
+}
+
+.last td, .last th {
+
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.last tr:nth-child(even) {
+  background-color: #dddddd; 
+}
