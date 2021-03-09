@@ -255,11 +255,9 @@ function displaychartInfo(charts){
     tr.appendChild(th);
     
     //variables  for the calculaation process
-   
 
-    var avgClose=0;
-    var minClose=0;
-    var avgVol=0;
+    let avgClose=0;
+    let avgVol=0;
   
 
     //arrays for the charts
@@ -292,7 +290,7 @@ function displaychartInfo(charts){
     document.getElementById("minimumOpen").innerHTML = parseInt(openCalc.slice(-1)[0]);
     document.getElementById("maxOpen").innerHTML = parseInt(openCalc[0]);
 
-    document.getElementById("averageclose").innerHTML = avgClose;
+    document.getElementById("averageClose").innerHTML = avgClose;
     document.getElementById("minimumClose").innerHTML = parseInt(closeCalc.slice(-1)[0]);
     document.getElementById("maxClose").innerHTML = parseInt(closeCalc[0])
 
