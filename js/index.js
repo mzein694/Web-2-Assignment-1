@@ -47,6 +47,7 @@ searchBox.addEventListener('keyup', function() {
 });
 document.querySelector("div.f ").style.visibility='hidden';
 document.querySelector("div.e ").style.visibility='hidden';
+document.querySelector("div.h ").style.visibility='hidden';
 displaySpeakButtoms();
 displayButtonDefaultview();
 displayButtonViewChart();
@@ -376,6 +377,7 @@ function displayButtonViewChart() {
         document.querySelector("div.g ").style.visibility='hidden';
         document.querySelector("div.f ").style.visibility='visible';
         document.querySelector("div.e ").style.visibility='visible';
+        document.querySelector("div.h ").style.visibility='visible';
         document.querySelector("div.e section").style.display = "grid";
         document.querySelector("div.e section").style.display = "block";
         // passing the value to draw the chart
@@ -521,7 +523,8 @@ function displayButtonDefaultview() {
         document.querySelector("div.d ").style.visibility='visible';
         document.querySelector("div.g ").style.visibility='visible';
         document.querySelector("div.f ").style.visibility='hidden';
-        document.querySelector("div.e").style.visibility ='hidden';                     
+        document.querySelector("div.e").style.visibility ='hidden'; 
+        document.querySelector("div.h").style.visibility='hidden';                    
     });
 }
 });
