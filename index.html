@@ -39,25 +39,25 @@
                 
                 <label>CompanyName:</label>
                 <span id="infocompanyName"></span> 
-
+                
                 <label>Sector:</label>
-                <span id="infosector"></span>     
+                <span id="infosector"></span>    
                 
-                <label>Industry:</label>
+                <label>Sub Industry:</label>
                 <span id="infoindustry"></span>   
-                            
+                
                 <label>Address:</label>
-                <span id="infoAddress"></span>    
-                
-                <label>Description:</label>
-                    <span id="infoDescription"></span>
-
-                <label>Exchange:</label>
-                <span id="infoexchange"></span>            
-                
+                <span id="infoAddress"></span> 
+                            
                 <label>Website:</label>
-                <span id="infowebsite"></span>
-                                                
+                <span id="infowebsite"></span>    
+                
+               <label>Exchange:</label>
+                <span id="infoexchange"></span> 
+               
+                <label>Description:</label>
+                <span id="infoDescription"></span>
+                              
             </section>  
         </div>
 
@@ -81,7 +81,7 @@
 
         <div class="box d">
             <div>
-                <Button type="View Chart" id="viewChartBtn"> </Button>
+                <Button type="View Chart" id="btnViewChart"> </Button>
             </div>
                 <section id="dchart">
                     <table id="stockData">
@@ -105,16 +105,19 @@
                 <div id="compNameChart">
                     <label>Company Name:</label>
                     <span id="chartCompanyName"></span>
+                    <span id="chartCompanyNameSpeak">
+                        <Button type="Speak" id="BtnCompanyNameSpeak">
+                    </span>
                 </div>
                 <div id="compDescChart">
                     <label>Description:</label>
                     <span id="chartCompanyDesc"></span> 
                     <span id="chartCompanyDescSpeak">
-                        <Button type="Speak" id="compDescSpeakBtn">
+                        <Button type="Speak" id="BtnCompanydescSpeak">
                     </span>
                 </div>
                 <span>
-                    <Button type="Speak" id="defaultBtn">
+                    <Button type="Speak" id="BtnDefalut">
                 </span>
                 
                 
@@ -168,9 +171,15 @@
                 </section>   
         </div>
         <div class="box h">
-            <section id="hchart"></section>
+            
+            <section id="hchart">
+
+            </section>
         </div>
        
+         
+        
+        
         </div>   
         </main>
     </body>
