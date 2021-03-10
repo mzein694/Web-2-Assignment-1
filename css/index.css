@@ -2,7 +2,7 @@ body {
   margin: 10px;
   margin-left: 10px;
   margin-right: 10px;
-  background-color:lightblue;
+  background-color:rgb(171, 225, 243);
   font-family:Georgia, 'Times New Roman', Times, serif;
   font-size: 0.8rem;
   height: 720px;
@@ -11,7 +11,7 @@ body {
 .Header{
   margin: auto;
   margin-bottom: 1%;
-  background-color: lightpink;
+  background-color: ;
   outline-style: auto;
   border-radius: 0px;
   padding: 5px;
@@ -54,13 +54,13 @@ body {
 display: grid;
 grid-gap: 10px;
 grid-template-columns: 20rem 25rem auto;
-color: lightpink;
+color: #800000;
 height: 570px;
 
 }
 
 .box {
-background-color: lightpink;
+background-color: ;
 color: black;
 border-radius: 5px;
 padding: 20px;
