@@ -1,4 +1,6 @@
-document.addEventListener("DOMContentLoaded",function(){   
+
+document.addEventListener("DOMContentLoaded",function(){  
+   
     const url='https://www.randyconnolly.com/funwebdev/3rd/api/stocks/companies.php';
 
     let links = document.getElementsByTagName("div");    
@@ -39,12 +41,16 @@ else {
     displayList();
 }
     
+
 // Search for company Symbol
-const searchBox = document.querySelector('.search');
-searchBox.addEventListener('keyup', function() {
-        let searchText = document.querySelector('.search').value;
-        displayList(searchText);
-});
+//const searchBox = document.querySelector('.search');
+
+
+/*btnGo.addEventListener('click', function() {
+        var searchBox = document.getElementById("btnGo");        
+        //let searchText = document.querySelector('.search').value;
+        displayList(searchBox.value);
+});*/
 document.querySelector("div.f ").style.visibility='hidden';
 document.querySelector("div.e ").style.visibility='hidden';
 document.querySelector("div.h ").style.visibility='hidden';
@@ -54,6 +60,7 @@ displayButtonViewChart();
   
             
 // Functions definitions
+
 function displayList(filter=''){
     let ul = document.getElementById("StockList");
     ul.innerHTML = "";
@@ -93,7 +100,7 @@ function displayList(filter=''){
         ul.appendChild(li);
         if (companies[i].symbol != null){
                 dv.addEventListener('click',function(){
-                    getCompanyData(companies[i].symbol);
+                    getCompanyData(companies[i].symbol);                    
                     getCompanyDatachart(companies[i].symbol);
                 });
         }
@@ -101,32 +108,38 @@ function displayList(filter=''){
     
 }   
 
+
 //Pass symbol to the url to check if the data is stored in the localstorage  
 let currentSelectedSymbol='';
 let selectedCompanayName='';
 let selectedCompanayDesc='';
 function getCompanyData(cmpny){
     let companyURL="https://www.randyconnolly.com/funwebdev/3rd/api/stocks/companies.php?symbol=" + cmpny;
-    let companyLocalData= localStorage.getItem("["+cmpny+"]");
+    var companyLocalData= localStorage.getItem("["+cmpny+"]");
     if (companyLocalData==null || companyLocalData=='') {
             // fetching the url
-           fetch(companyURL) 
-           .then(companyResponse => {
-               return companyResponse.json();
-            })
-            //if data isn't found in localstorage then adds the  data to localstorage 
-            .then(companyData => { 
-                localStorage.setItem("["+cmpny+"]",JSON.stringify(companyData));   
-                displayInfo(companyLocalData);
-           })
-            .catch(function (error) {
-                console.log(error)
-        });
+            getCompany(companyURL);
+            async function getCompany(companyURL) {
+               try {
+            
+                   let data = await fetch(companyURL);
+                   let copmanyData = await data.json(); 
+                   companyLocalData = JSON.stringify(copmanyData );
+                   localStorage.setItem("["+cmpny+"]",companyLocalData);                    
+                   await getCompanyData(cmpny);
+        
+               } catch (e) {
+                   console.error(e);
+               }
+            }
+
     } 
     else {
         companyLocalData = localStorage.getItem("["+cmpny+"]"); //Data is found
         displayInfo(companyLocalData);
+    
     }
+  
 }
     
 // Display the symbol with its logo  
@@ -161,8 +174,8 @@ function displayInfo(cmpny){
 
     initMap();
     createMarker(map, lat, lng);
-    Chart2(companyInfoData)
-    finicalTable(companyInfoData[0].financials)
+    Chart2(companyInfoData);
+    finicalTable(companyInfoData[0].financials);
 }
 
 function initMap() {
@@ -188,32 +201,31 @@ function createMarker(map, latitude, longitude, city) {
 
 //passing the symbol to the url and see if the data is store  in the localstorage  
 function getCompanyDatachart(cmpny){   
-    let companychartLocalData=localStorage.getItem(cmpny);
+    var companychartLocalData=localStorage.getItem(cmpny);
     const companyChartURL="https://www.randyconnolly.com/funwebdev/3rd/api/stocks/history.php?symbol=" + cmpny ;
   
     if (companychartLocalData==null || companychartLocalData=='') {
-           fetch(companyChartURL)
-           .then(companyCResponse => {
-               return companyCResponse.json();
-            })
-            //if data isn't found in localstorage then adding the  data in the localstorage
-            .then(companyCData => { 
-                if (companyCData.length>0) {
-                    localStorage.setItem(cmpny,JSON.stringify(companyCData));
-                    companychartLocalData = localStorage.getItem(cmpny);
+            getHistory(companyChartURL);
+             async function getHistory(companyChartURL) {
+                try {
+    
+                    let data = await fetch(companyChartURL);
+                    let history  = await data.json();
+                    companychartLocalData = JSON.stringify(history);
+                    localStorage.setItem(cmpny,companychartLocalData);
+                    await getCompanyDatachart(cmpny);
+                    
+      
+                } catch (e) {
+                    console.error(e);
                 }
-           })
-            .catch(function (error) {
-               console.log(error);
-        });
-    } 
-    //If data is found 
-    else { 
-        companychartLocalData = localStorage.getItem(cmpny);        
-    }
-    if (companychartLocalData.length>0) {
-        displaychartInfo(companychartLocalData);
-    }
+             }
+       
+  }  else { //If data is found 
+        companychartLocalData = localStorage.getItem(cmpny);    
+        displaychartInfo(companychartLocalData);    
+  }
+    
 }
   
 // Display the charts statictis 
@@ -346,7 +358,7 @@ function displaychartInfo(charts){
         var td = document.createElement("td");
         td.appendChild(document.createTextNode(parseInt(companiescharts[i]['volume'])));
         tr.appendChild(td);
-        volums
+
         volums.push(companiescharts[i]['volume']/10000);
 
         avgClose = avgClose + companiescharts[i]['close'];
@@ -358,75 +370,30 @@ function displaychartInfo(charts){
 
 }
 
-let year=[];
-let revenue=[];
-let earnings=[];
-let assets=[];
-let Liabilities=[];
 
 
 function finicalTable(finData){
-  
-    let tbl = document.getElementById('finicalData');
-    tbl.innerHTML = "";
-        
-    var tr = document.createElement("tr");
-    tbl.appendChild(tr);
-
-    //add data items
-    var th = document.createElement("th");
-    th.appendChild(document.createTextNode("Year"));
-    tr.appendChild(th);
-
-    var th = document.createElement("th");
-    th.appendChild(document.createTextNode("Revenue"));
-    tr.appendChild(th);
-
-    var th = document.createElement("th");
-    th.appendChild(document.createTextNode("Earnings"));
-    tr.appendChild(th);
-
-    var th = document.createElement("th");
-    th.appendChild(document.createTextNode("Assets"));
-    tr.appendChild(th);
-
-    var th = document.createElement("th");
-    th.appendChild(document.createTextNode("Liabilities"));
-    tr.appendChild(th);
-
-
-    // for (let i = 0; i < finData.length; i++){
-    //     // adds row
-        
-    //     var tr = document.createElement("tr");
-    //     tbl.appendChild(tr);
-
-    //     //adding data items
-    //     var td = document.createElement("td");
-    //     td.appendChild(document.createTextNode(companiescharts[i]['assets']));
-    //     tr.appendChild(td);
-    //     x.push(companiescharts[i]['date']);
-
-    //     var td = document.createElement("td");
-    //     td.appendChild(document.createTextNode(companiescharts[i]['earnings']));
-    //     tr.appendChild(td);
-        
-    //     var td = document.createElement("td");
-    //     td.appendChild(document.createTextNode(companiescharts[i]['liabilities']));
-    //     tr.appendChild(td);
-        
-    //     var td = document.createElement("td");
-    //     td.appendChild(document.createTextNode(companiescharts[i]['revenue']));
-    //     tr.appendChild(td);
-        
-    //     var td = document.createElement("td");
-    //     td.appendChild(document.createTextNode(companiescharts[i]['years']));
-    //     tr.appendChild(td);
-        
-   
-
-    // }
-
+     
+    var sec = document.getElementById("hchart");  
+    sec.innerHTML = "";
+    
+    
+    if (finData != null) {
+        $table = "<table><tr><th>Year</th><th>Assets</th><th>Earning</th><th>Revenue</th><th>Liabilities</th><th></tr>";
+        for (let i = 0; i < finData.revenue.length; i++){
+            $table += "<tr><td>" + ((finData.years[i]!=null) ? finData.years[i] : '') +
+                    "</td><td>"+ ((finData.assets[i]!=null) ? finData.assets[i] : '') + 
+                    "</td><td>" + ((finData.earnings[i]!=null) ? finData.earnings[i] : '') +  
+                    "</td><td>"+ ((finData.revenue[i]!=null) ? finData.revenue[i] : '') + 
+                    "</td><td>"+ ((finData.liabilities[i]!=null) ? finData.liabilities[i] : '') + 
+                    "</td></tr>";
+        }
+    
+    sec.innerHTML= $table + "</table";
+    } else {
+        sec.innerHTML= "No Financial Data";
+    }
+    
 }
 
 
@@ -563,7 +530,7 @@ function displayChart(closePrices,volums,x){
 
 
 function Chart2(companyInfo){
-    
+    if (companyInfo[0].financials != null) {
     const contain = document.querySelector("#columns");
     const Chart2 = new Chart(contain, {
         type: "bar",
@@ -593,6 +560,7 @@ function Chart2(companyInfo){
             ]
         }
     });
+    }
 }
 
 function displayButtonDefaultview() {
@@ -614,4 +582,19 @@ function displayButtonDefaultview() {
         document.querySelector("div.h").style.visibility='hidden';                    
     });
 }
+
+btnGo.addEventListener('click', function() {
+    //document.getElementById("filterList").value ="";
+    var filter = document.getElementById("filterList").value;
+    console.log(filter);
+    displayList(filter);
+})
+    
+btnClear.addEventListener('click', function() {
+    document.getElementById("filterList").value ="";
+    displayList();
+}) 
+
 });
+
+
