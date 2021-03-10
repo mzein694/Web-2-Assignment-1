@@ -9,6 +9,11 @@
     <title>COMP 3512 Assig1</title>
     
     <link rel="stylesheet" href="./css/index.css"> 
+    <script type="text/javascript" src="./js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.0.2/dist/echarts.min.js"></script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAp2b_XrHqfJyPZes-fcY5RAEmIkpcSV6E&callback=initMap"></script>
+
 </head>
 
 <body>
@@ -60,19 +65,19 @@
     <div class="box b">
 
         <section> 
+   
         <fieldset>
             <legend>List of companies </legend>
             <label for="filter">Filter:</label>
-            <input type="text" class="search" placeholder="Type for matching companies" list="filterList">
-            <datalist id="filterList">
-            </datalist> 
-            <button type="submit" form="" value="Go">Go</button>
-            <button type="reset" form="" value="clear">Clear</button>
+            <input id="filterList" type="text" class="search" placeholder="Type for matching companies">
+            <button id="btnGo">Go</button>
+            <button id="btnClear">Clear</button>
+
         </fieldset>
         <ul id="StockList"></ul>
+        
         </section>
     </div>
-    
         <div class="box c" id="map" style="height: 300px; height: 430px; position: relative; overflow: hidden; visibility: visible; top: -1130px; width: 5400px;"></div>
 
         <div class="box d">
@@ -169,15 +174,7 @@
         <div class="box h">
             
             <section id="hchart">
-                <table id="finicalData">
-                <tr >
-                    <th>Year</th>
-                    <th>Revenue</th>
-                    <th>Earnings</th>
-                    <th>Assets</th>
-                    <th>Liabilities</th>
-                </tr>
-                </table>
+
             </section>
         </div>
        
@@ -185,10 +182,6 @@
         
         
         </div>   
-        <script type="text/javascript" src="./js/index.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/echarts@5.0.2/dist/echarts.min.js"></script>
-        <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAp2b_XrHqfJyPZes-fcY5RAEmIkpcSV6E&callback=initMap"></script>
         </main>
     </body>
 </html>
