@@ -1,5 +1,5 @@
+let currentSelectedSymbol='';
 document.addEventListener("DOMContentLoaded",function(){  
-   
     const url='https://www.randyconnolly.com/funwebdev/3rd/api/stocks/companies.php';
 
     let links = document.getElementsByTagName("div");    
@@ -19,17 +19,17 @@ document.addEventListener("DOMContentLoaded",function(){
         }
     }
  
-//checks for the load storage    
+//storage load   
 let localData;
 if (localStorage.getItem('companies') == null && localStorage.getItem('companies')!='') {
-    fetch(url) //fetches the url to check loadStorge for JSON 
+    fetch(url)
         .then(response => {
             return response.json();
         })
         .then(data => {
             localStorage.setItem('companies',JSON.stringify(data));
             localData = localStorage.getItem('companies');
-            displayList();
+            showList();
         })
         .catch(function (error) {
             console.log(error)
@@ -37,25 +37,25 @@ if (localStorage.getItem('companies') == null && localStorage.getItem('companies
 } 
 else {
     localData = localStorage.getItem('companies');
-    displayList();
+    showList();
 }
     
 document.querySelector("div.f ").style.visibility='hidden';
 document.querySelector("div.e ").style.visibility='hidden';
 document.querySelector("div.h ").style.visibility='hidden';
-displaySpeakButtoms();
-displayButtonDefaultview();
-displayButtonViewChart();
+speakBtns();
+defaultViewBtn();
+viewChartBtn();
             
-// Functions definitions
-function displayList(filter=''){
+
+function showList(filter=''){
     let ul = document.getElementById("StockList");
     ul.innerHTML = "";
     let companies = [];
     document.querySelector(".b section").style.display = "block";
     companies = JSON.parse(localData);
 
-    // perform filter if it is needed
+    //filter
     if (filter!=''){
         let filterItems = (filter) => {
             return companies.filter(el => el.symbol.startsWith(filter));
@@ -63,7 +63,7 @@ function displayList(filter=''){
         companies= filterItems(filter);
     }
     
-    // creating the img and its logo 
+    //logo and image 
     for (let i = 0; i < companies.length; i++) {
         let ul = document.getElementById("StockList");
         let li = document.createElement("li");
@@ -77,7 +77,7 @@ function displayList(filter=''){
         let linkText = document.createTextNode(companies[i].symbol);
 
         lnk.appendChild(img); 
-        // adds the symbol to the img
+        // symbol is added to logo
         lnk.appendChild(linkText);
         dv.className='myDiv';
         spn.appendChild(lnk);
@@ -87,32 +87,29 @@ function displayList(filter=''){
         ul.appendChild(li);
         if (companies[i].symbol != null){
                 dv.addEventListener('click',function(){
-                    getCompanyData(companies[i].symbol);                    
-                    getCompanyDatachart(companies[i].symbol);
+                    fetchCompData(companies[i].symbol);                    
+                    fetchCompDatachart(companies[i].symbol);
                 });
         }
     }
-    
 }   
 
-//Pass symbol to the url to check if the data is stored in the localstorage  
-let currentSelectedSymbol='';
+//checks for stored data is local storage after symbol is passed 
 let selectedCompanayName='';
 let selectedCompanayDesc='';
-function getCompanyData(cmpny){
+function fetchCompData(cmpny){
     let companyURL="https://www.randyconnolly.com/funwebdev/3rd/api/stocks/companies.php?symbol=" + cmpny;
     var companyLocalData= localStorage.getItem("["+cmpny+"]");
     if (companyLocalData==null || companyLocalData=='') {
-            // fetching the url
+            //fetches the url using link
             getCompany(companyURL);
             async function getCompany(companyURL) {
                try {
-            
                    let data = await fetch(companyURL);
                    let copmanyData = await data.json(); 
                    companyLocalData = JSON.stringify(copmanyData );
                    localStorage.setItem("["+cmpny+"]",companyLocalData);                    
-                   await getCompanyData(cmpny);
+                   await fetchCompData(cmpny);
         
                } catch (e) {
                    console.error(e);
@@ -121,22 +118,21 @@ function getCompanyData(cmpny){
     } 
     else {
         companyLocalData = localStorage.getItem("["+cmpny+"]"); //Data is found
-        displayInfo(companyLocalData);
+        showInformation(companyLocalData);
     } 
 }
     
-// Display the symbol with its logo  
+// Symbol and logo is shown 
 let map ;
 let lat ;
 let lng;  
-function displayInfo(cmpny){   
+function showInformation(cmpny){   
     companyInfoData=JSON.parse(cmpny);
-
     document.querySelector("div.a section").style.display = "grid";
     let pic = document.getElementById("pic"); 
     pic.src = './logos/' + ((companyInfoData.symbol != '') ? companyInfoData[0].symbol : companyInfoData.symbol) + '.svg';
     pic.className ='divImg';
-    document.getElementById("infoSymbol").innerHTML = companyInfoData[0].symbol // ((companyInfoData.symbol != '') ? companyInfoData[0].symbol : companyInfoData.symbol); 
+    document.getElementById("infoSymbol").innerHTML = companyInfoData[0].symbol;
     document.getElementById("infocompanyName").innerHTML = ((companyInfoData.name != '') ? companyInfoData[0].name : companyInfoData.name);
     document.getElementById("infoexchange").innerHTML = ((companyInfoData.exchange != '') ? companyInfoData[0].exchange : companyInfoData.exchange);
     document.getElementById("infoindustry").innerHTML = ((companyInfoData.subindustry != '') ? companyInfoData[0].subindustry : companyInfoData.subindustry);
@@ -145,7 +141,7 @@ function displayInfo(cmpny){
     document.getElementById("infowebsite").innerHTML = ((companyInfoData.website != '') ?  companyInfoData[0].description : companyInfoData.description);
     document.getElementById("infosector").innerHTML = ((companyInfoData.sector != '') ? companyInfoData[0].description : companyInfoData.description) ;
      
-    // Display company statictis in Chart box
+    // chart box with company stats
     document.getElementById("chartCompanySymbol").innerHTML = ((companyInfoData.symbol != '') ? companyInfoData[0].symbol : companyInfoData.symbol); 
     document.getElementById("chartCompanyName").innerHTML =  ((companyInfoData.name != '') ? companyInfoData[0].name : companyInfoData.name);
     document.getElementById("chartCompanyDesc").innerHTML =((companyInfoData.website != '') ?  companyInfoData[0].description : companyInfoData.description);
@@ -182,8 +178,8 @@ function createMarker(map, latitude, longitude, city) {
     });
 }   
 
-//passing the symbol to the url and see if the data is store  in the localstorage  
-function getCompanyDatachart(cmpny){   
+//checks local storage for data 
+function fetchCompDatachart(cmpny){   
     var companychartLocalData=localStorage.getItem(cmpny);
     const companyChartURL="https://www.randyconnolly.com/funwebdev/3rd/api/stocks/history.php?symbol=" + cmpny ;
   
@@ -191,12 +187,11 @@ function getCompanyDatachart(cmpny){
             getHistory(companyChartURL);
              async function getHistory(companyChartURL) {
                 try {
-    
                     let data = await fetch(companyChartURL);
                     let history  = await data.json();
                     companychartLocalData = JSON.stringify(history);
                     localStorage.setItem(cmpny,companychartLocalData);
-                    await getCompanyDatachart(cmpny);
+                    await fetchCompDatachart(cmpny);
                     
       
                 } catch (e) {
@@ -204,18 +199,18 @@ function getCompanyDatachart(cmpny){
                 }
              }
        
-  }  else { //If data is found 
+  }  else { 
         companychartLocalData = localStorage.getItem(cmpny);    
         displaychartInfo(companychartLocalData);    
   }
     
 }
   
-// Display the charts statictis 
+// shows charts stats
 function displaychartInfo(charts){
     document.querySelector("div.d  section").style.display = "grid";
     document.querySelector("div  #dchart").style.display = "grid";
-    document.querySelector("div #btnViewChart").style.display = "grid";
+    document.querySelector("div #viewChartBtn").style.display = "grid";
     let companiescharts =[];
     companiescharts=JSON.parse(charts);
     let tbl = document.getElementById('stockData');
@@ -224,7 +219,7 @@ function displaychartInfo(charts){
     var tr = document.createElement("tr");
     tbl.appendChild(tr);
 
-    //add data items
+    //data items are added
     var th = document.createElement("th");
     th.appendChild(document.createTextNode("Date"));
     tr.appendChild(th);
@@ -250,7 +245,6 @@ function displaychartInfo(charts){
     tr.appendChild(th);
     
     //variables  for the calculaation process
-
     let avgClose=0;
     let avgVol=0;
   
@@ -303,7 +297,7 @@ function displaychartInfo(charts){
     let totalVol=0
 
     closePrices =[];
-    volums =[];
+    volumes =[];
     x = [];
 
     for (let i = 0; i < companiescharts.length; i++){
@@ -338,7 +332,7 @@ function displaychartInfo(charts){
         td.appendChild(document.createTextNode(parseInt(companiescharts[i]['volume'])));
         tr.appendChild(td);
 
-        volums.push(companiescharts[i]['volume']/10000);
+        volumes.push(companiescharts[i]['volume']/10000);
 
         avgClose = avgClose + companiescharts[i]['close'];
          (companiescharts[i]['close'] < minClose) ? minClose = companiescharts[i]['close'] : console.log('');
@@ -379,18 +373,13 @@ function average(nums) {
    
 }
 
-// Creating a buttom that change the view of the website 
-function displayButtonViewChart() {
-    let btnViewChart = document.getElementById("btnViewChart");
-    let textbtn = document.createTextNode('View Chart');
-    btnViewChart.appendChild(textbtn);
-    btnViewChart.style.background = 'grey';
-    btnViewChart.style.width = '95px';
-    btnViewChart.style.height = '35px';
-    btnViewChart.style.borderRadius = "30px"
-
-    btnViewChart.addEventListener('click', function(){
-        // when the buttom is clicked it hide a, b,c,d and display e and f
+// button to change the view of website
+function viewChartBtn() {
+    let viewChartBtn = document.getElementById("viewChartBtn");
+    let textBtn = document.createTextNode('View Chart');
+    viewChartBtn.appendChild(textBtn);
+    viewChartBtn.addEventListener('click', function(){
+        // shows charts and speak buttons when clicked
         document.querySelector("div.a ").style.visibility='hidden';
         document.querySelector("div.b ").style.visibility='hidden';
         document.querySelector("div.c ").style.visibility='hidden';
@@ -401,43 +390,43 @@ function displayButtonViewChart() {
         document.querySelector("div.h ").style.visibility='visible';
         document.querySelector("div.e section").style.display = "grid";
         document.querySelector("div.e section").style.display = "block";
-        // passing the value to draw the chart
-        displayChart(closePrices,volums,x); 
+        // chart values are shown when the values are passed
+        displayChart(closePrices,volumes,x); 
     }); 
 }
     
-//Having two clicked buttom to speck the content on th screen.    
-function displaySpeakButtoms() {
-    let BtnCompanyNameSpeak = document.getElementById("BtnCompanyNameSpeak");
-    let textbtn = document.createTextNode('Speak');
-    BtnCompanyNameSpeak.appendChild(textbtn);
-    BtnCompanyNameSpeak.addEventListener("click",function(){
+//text speech is heard when button is clicked   
+function speakBtns() {
+    let compNameSpeakBtn = document.getElementById("compNameSpeakBtn");
+    let textBtn = document.createTextNode('Speak');
+    compNameSpeakBtn.appendChild(textBtn);
+    compNameSpeakBtn.addEventListener("click",function(){
          speakText(selectedCompanayName);
     });
          
-    let BtnCompanydescSpeak = document.getElementById("BtnCompanydescSpeak");
-    let textbtn2 = document.createTextNode('Speak');
-    BtnCompanydescSpeak.appendChild(textbtn2);
+    let compDescSpeakBtn = document.getElementById("compDescSpeakBtn");
+    let textBtn2 = document.createTextNode('Speak');
+    compDescSpeakBtn.appendChild(textBtn2);
     
-    BtnCompanydescSpeak.addEventListener("click",function(){
+    compDescSpeakBtn.addEventListener("click",function(){
         speakText(selectedCompanayDesc);
     });
 }
 
 //Speak functiion     
 function speakText(txt){
-    let msg = new SpeechSynthesisUtterance();
-    msg.text = txt;
-    window.speechSynthesis.speak(msg);
+    let message = new SpeechSynthesisUtterance();
+    message.text = txt;
+    window.speechSynthesis.speak(message);
 }
    
 // Displays the volumes, close prices and the date on the chart 
 let closePrices =[];
-let volums =[];
+let volumes =[];
 let x = [];
-function displayChart(closePrices,volums,x){
-    let dom = document.getElementById("myChart");
-    let myChart = echarts.init(dom);
+function displayChart(closePrices,volumes,x){
+    let chartData = document.getElementById("myChart");
+    let myChart = echarts.init(chartData);
     
     option = null;
     option = {
@@ -485,7 +474,7 @@ function displayChart(closePrices,volums,x){
                 name:'Close Price'
             },
             {
-                data: volums,
+                data: volumes,
                 type: 'line',
                 name:'Volumes'
             }         
@@ -531,15 +520,14 @@ function Chart2(companyInfo){
     }
 }
 
-function displayButtonDefaultview() {
-    let BtnDefalut = document.getElementById("BtnDefalut");
-    let textbtn = document.createTextNode('Close');
-    BtnDefalut.appendChild(textbtn);
-    BtnDefalut.style.background = 'grey';
-    BtnDefalut.style.width = '95px';
-    BtnDefalut.style.height = '35px';
-    BtnDefalut.style.borderRadius = "30px"
-    BtnDefalut.addEventListener('click', function(){
+function defaultViewBtn() {
+    let defaultBtn = document.getElementById("defaultBtn");
+    let textBtn = document.createTextNode('Close');
+    defaultBtn.appendChild(textBtn);
+    defaultBtn.style.background = 'lightgrey';
+    defaultBtn.style.width = '85px';
+    defaultBtn.style.height = '30px';
+    defaultBtn.addEventListener('click', function(){
         document.querySelector("div.a ").style.visibility='visible';
         document.querySelector("div.b ").style.visibility='visible';
         document.querySelector("div.c ").style.visibility='visible';
@@ -555,11 +543,11 @@ btnGo.addEventListener('click', function() {
     //document.getElementById("filterList").value ="";
     var filter = document.getElementById("filterList").value;
     console.log(filter);
-    displayList(filter);
+    showList(filter);
 })
     
 btnClear.addEventListener('click', function() {
     document.getElementById("filterList").value ="";
-    displayList();
+    showList();
 }) 
 });
