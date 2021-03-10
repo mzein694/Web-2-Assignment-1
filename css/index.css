@@ -339,15 +339,6 @@ div #viewChartBtn {
   font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
-#compNameSpeakBtn{
-   background-color: lightgrey; 
-  width: 85px;
-  height :30px;
-  font-size:17px;
-  position: relative;
-  left: 24px;
-  font-family:Georgia, 'Times New Roman', Times, serif;
-}
 
 #compDescSpeakBtn{
   background-color: lightgrey; 
