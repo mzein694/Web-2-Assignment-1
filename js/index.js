@@ -305,7 +305,13 @@ function displaychartInfo(charts){
     document.getElementById("averageVolume").innerHTML = avgVol;
     document.getElementById("minimumVolume").innerHTML = parseInt(volumeCalc.slice(-1)[0]);
     document.getElementById("maxVolume").innerHTML = parseInt(volumeCalc[0]);
-    
+     
+    let minClose=0;
+    let totalVol=0
+
+    closePrices =[];
+    volums =[];
+    x = [];
 
     for (let i = 0; i < companiescharts.length; i++){
         // adds row
@@ -340,10 +346,24 @@ function displaychartInfo(charts){
         var td = document.createElement("td");
         td.appendChild(document.createTextNode(parseInt(companiescharts[i]['volume'])));
         tr.appendChild(td);
+        volums
         volums.push(companiescharts[i]['volume']/10000);
 
+        avgClose = avgClose + companiescharts[i]['close'];
+         (companiescharts[i]['close'] < minClose) ? minClose = companiescharts[i]['close'] : console.log('');
+         avgVol = avgVol + companiescharts[i]['volume'];
+         totalVol = totalVol + companiescharts[i]['volume'];
+
     }
+
 }
+
+let year=[];
+let revenue=[];
+let earnings=[];
+let assets=[];
+let Liabilities=[];
+
 
 function finicalTable(finData){
   
@@ -375,37 +395,37 @@ function finicalTable(finData){
     tr.appendChild(th);
 
 
-    for (let i = 0; i < finData.length; i++){
-        // adds row
+    // for (let i = 0; i < finData.length; i++){
+    //     // adds row
         
-        var tr = document.createElement("tr");
-        tbl.appendChild(tr);
+    //     var tr = document.createElement("tr");
+    //     tbl.appendChild(tr);
 
-        //adding data items
-        var td = document.createElement("td");
-        td.appendChild(document.createTextNode(companiescharts[i]['assets']));
-        tr.appendChild(td);
-        x.push(companiescharts[i]['date']);
+    //     //adding data items
+    //     var td = document.createElement("td");
+    //     td.appendChild(document.createTextNode(companiescharts[i]['assets']));
+    //     tr.appendChild(td);
+    //     x.push(companiescharts[i]['date']);
 
-        var td = document.createElement("td");
-        td.appendChild(document.createTextNode(companiescharts[i]['earnings']));
-        tr.appendChild(td);
+    //     var td = document.createElement("td");
+    //     td.appendChild(document.createTextNode(companiescharts[i]['earnings']));
+    //     tr.appendChild(td);
         
-        var td = document.createElement("td");
-        td.appendChild(document.createTextNode(companiescharts[i]['liabilities']));
-        tr.appendChild(td);
+    //     var td = document.createElement("td");
+    //     td.appendChild(document.createTextNode(companiescharts[i]['liabilities']));
+    //     tr.appendChild(td);
         
-        var td = document.createElement("td");
-        td.appendChild(document.createTextNode(companiescharts[i]['revenue']));
-        tr.appendChild(td);
+    //     var td = document.createElement("td");
+    //     td.appendChild(document.createTextNode(companiescharts[i]['revenue']));
+    //     tr.appendChild(td);
         
-        var td = document.createElement("td");
-        td.appendChild(document.createTextNode(companiescharts[i]['years']));
-        tr.appendChild(td);
+    //     var td = document.createElement("td");
+    //     td.appendChild(document.createTextNode(companiescharts[i]['years']));
+    //     tr.appendChild(td);
         
-        
+   
 
-    }
+    // }
 
 }
 
@@ -479,7 +499,7 @@ let x = [];
 function displayChart(closePrices,volums,x){
     let dom = document.getElementById("myChart");
     let myChart = echarts.init(dom);
-    let app = {};
+    
     option = null;
     option = {
         title: {
@@ -530,12 +550,17 @@ function displayChart(closePrices,volums,x){
                 type: 'line',
                 name:'Volumes'
             }
+            
         ]
     };
+    
     if (option && typeof option === "object") {
         myChart.setOption(option, true);
     }
+    
+
 }
+
 
 function Chart2(companyInfo){
     
