@@ -98,7 +98,7 @@ function showList(filter=''){
 let selectedCompanayName='';
 let selectedCompanayDesc='';
 function fetchCompData(cmpny){
-    let companyURL="https://www.randyconnolly.com/funwebdev/3rd/api/stocks/history.php?symbol=xxx" + cmpny;
+    let companyURL= "https://www.randyconnolly.com/funwebdev/3rd/api/stocks/companies.php?symbol=" + cmpny;
     var companyLocalData= localStorage.getItem("["+cmpny+"]");
     if (companyLocalData==null || companyLocalData=='') {
             //fetches the url using link
@@ -132,14 +132,14 @@ function showInformation(cmpny){
     let pic = document.getElementById("pic"); 
     pic.src = './logos/' + ((companyInfoData.symbol != '') ? companyInfoData[0].symbol : companyInfoData.symbol) + '.svg';
     pic.className ='divImg';
-    document.getElementById("infoSymbol").innerHTML = companyInfoData[0].symbol;
+    document.getElementById("infoSymbol").innerHTML = companyInfoData[0].symbol
     document.getElementById("infocompanyName").innerHTML = ((companyInfoData.name != '') ? companyInfoData[0].name : companyInfoData.name);
     document.getElementById("infoexchange").innerHTML = ((companyInfoData.exchange != '') ? companyInfoData[0].exchange : companyInfoData.exchange);
     document.getElementById("infoindustry").innerHTML = ((companyInfoData.subindustry != '') ? companyInfoData[0].subindustry : companyInfoData.subindustry);
     document.getElementById("infoAddress").innerHTML = ((companyInfoData.address != '') ? companyInfoData[0].address : companyInfoData.address);
     document.getElementById("infoDescription").innerHTML = ((companyInfoData.description != '') ? companyInfoData[0].description : companyInfoData.description);
-    document.getElementById("infowebsite").innerHTML = ((companyInfoData.website != '') ?  companyInfoData[0].description : companyInfoData.description);
-    document.getElementById("infosector").innerHTML = ((companyInfoData.sector != '') ? companyInfoData[0].description : companyInfoData.description) ;
+    document.getElementById("infowebsite").innerHTML = ((companyInfoData.website != '') ?  companyInfoData[0].website : companyInfoData.website);
+    document.getElementById("infosector").innerHTML = ((companyInfoData.sector != '') ? companyInfoData[0].sector : companyInfoData.sector) ;
      
     // chart box with company stats
     document.getElementById("chartCompanySymbol").innerHTML = ((companyInfoData.symbol != '') ? companyInfoData[0].symbol : companyInfoData.symbol); 
@@ -181,7 +181,7 @@ function createMarker(map, latitude, longitude, city) {
 //checks local storage for data 
 function fetchCompDatachart(cmpny){   
     var companychartLocalData=localStorage.getItem(cmpny);
-    const companyChartURL="https://www.randyconnolly.com/funwebdev/3rd/api/stocks/history.php?symbol=xxx" + cmpny ;
+    const companyChartURL= "https://www.randyconnolly.com/funwebdev/3rd/api/stocks/history.php?symbol=" + cmpny ;
   
     if (companychartLocalData==null || companychartLocalData=='') {
             getHistory(companyChartURL);
@@ -342,10 +342,8 @@ function displaychartInfo(charts){
 }
 
 function finicalTable(finData){
-     
     var sec = document.getElementById("hchart");  
     sec.innerHTML = "";
-    
     
     if (finData != null) {
         $table = "<table><tr><th>Year</th><th>Assets</th><th>Earning</th><th>Revenue</th><th>Liabilities</th><th></tr>";
