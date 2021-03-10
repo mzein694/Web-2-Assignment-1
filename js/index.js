@@ -397,13 +397,6 @@ function viewChartBtn() {
     
 //text speech is heard when button is clicked   
 function speakBtns() {
-    let compNameSpeakBtn = document.getElementById("compNameSpeakBtn");
-    let textBtn = document.createTextNode('Speak');
-    compNameSpeakBtn.appendChild(textBtn);
-    compNameSpeakBtn.addEventListener("click",function(){
-         speakText(selectedCompanayName);
-    });
-         
     let compDescSpeakBtn = document.getElementById("compDescSpeakBtn");
     let textBtn2 = document.createTextNode('Speak');
     compDescSpeakBtn.appendChild(textBtn2);
