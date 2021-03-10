@@ -98,7 +98,7 @@ function showList(filter=''){
 let selectedCompanayName='';
 let selectedCompanayDesc='';
 function fetchCompData(cmpny){
-    let companyURL="https://www.randyconnolly.com/funwebdev/3rd/api/stocks/companies.php?symbol=" + cmpny;
+    let companyURL="https://www.randyconnolly.com/funwebdev/3rd/api/stocks/history.php?symbol=xxx" + cmpny;
     var companyLocalData= localStorage.getItem("["+cmpny+"]");
     if (companyLocalData==null || companyLocalData=='') {
             //fetches the url using link
@@ -181,7 +181,7 @@ function createMarker(map, latitude, longitude, city) {
 //checks local storage for data 
 function fetchCompDatachart(cmpny){   
     var companychartLocalData=localStorage.getItem(cmpny);
-    const companyChartURL="https://www.randyconnolly.com/funwebdev/3rd/api/stocks/history.php?symbol=" + cmpny ;
+    const companyChartURL="https://www.randyconnolly.com/funwebdev/3rd/api/stocks/history.php?symbol=xxx" + cmpny ;
   
     if (companychartLocalData==null || companychartLocalData=='') {
             getHistory(companyChartURL);
