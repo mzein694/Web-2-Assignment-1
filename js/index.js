@@ -123,17 +123,23 @@ document.addEventListener("DOMContentLoaded",function(){
         companyInfoData=JSON.parse(comp);
         document.querySelector("div.a section").style.display = "grid";
         let pic = document.getElementById("pic"); 
-        pic.src = './logos/' + ((companyInfoData.symbol != '') ? companyInfoData[0].symbol : companyInfoData.symbol) + '.svg';
+        pic.src = './logos/' + ((companyInfoData.symbol != '') ? companyInfoData[0].symbol : companyInfoData.symbol) + '.svg'; 
         pic.className ='divImg';
+        const stockLink = '<a href="' + companyInfoData[0].website +'"target="_blank>' + companyInfoData[0].name +"</a>";
+        
         document.getElementById("infoSymbol").innerHTML = companyInfoData[0].symbol
         document.getElementById("infocompanyName").innerHTML = ((companyInfoData.name != '') ? companyInfoData[0].name : companyInfoData.name);
-        document.getElementById("infoexchange").innerHTML = ((companyInfoData.exchange != '') ? companyInfoData[0].exchange : companyInfoData.exchange);
+        document.getElementById("infosector").innerHTML = ((companyInfoData.sector != '') ? companyInfoData[0].sector : companyInfoData.sector);
         document.getElementById("infoindustry").innerHTML = ((companyInfoData.subindustry != '') ? companyInfoData[0].subindustry : companyInfoData.subindustry);
         document.getElementById("infoAddress").innerHTML = ((companyInfoData.address != '') ? companyInfoData[0].address : companyInfoData.address);
-        document.getElementById("infoDescription").innerHTML = ((companyInfoData.description != '') ? companyInfoData[0].description : companyInfoData.description);
-        document.getElementById("infowebsite").innerHTML = ((companyInfoData.website != '') ?  companyInfoData[0].website : companyInfoData.website);
-        document.getElementById("infosector").innerHTML = ((companyInfoData.sector != '') ? companyInfoData[0].sector : companyInfoData.sector) ;
         
+        const link1 = document.querySelector("#infowebsite");
+        link1.setAttribute("href", companyInfoData[0].website);
+        link1.textContent = companyInfoData[0].name;
+
+        document.getElementById("infoexchange").innerHTML = ((companyInfoData.exchange != '') ? companyInfoData[0].exchange : companyInfoData.exchange);
+        document.getElementById("infoDescription").innerHTML = ((companyInfoData.description != '') ? companyInfoData[0].description : companyInfoData.description);
+
         // chart box with company stats
         document.getElementById("chartCompanySymbol").innerHTML = ((companyInfoData.symbol != '') ? companyInfoData[0].symbol : companyInfoData.symbol); 
         document.getElementById("chartCompanyName").innerHTML =  ((companyInfoData.name != '') ? companyInfoData[0].name : companyInfoData.name);
