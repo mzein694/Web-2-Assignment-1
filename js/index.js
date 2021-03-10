@@ -17,6 +17,18 @@ document.addEventListener("DOMContentLoaded",function(){
             });
         }
     }
+    
+    
+    //credit timeout
+    let time; 
+    function creditsTimeOut(){
+        clearTimeout(time);
+        document.querySelector('span.tooltiptext').style.visibility = 'visible';
+        time = setTimeout(() => {
+            document.querySelector('span.tooltiptext').style.visibility = 'hidden';
+        }, 5000);
+    }
+    document.querySelector('h1').addEventListener('mouseover', creditsTimeOut);
  
 //storage load   
 let localData;
