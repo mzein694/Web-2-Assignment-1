@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded",function(){  
    
     const url='https://www.randyconnolly.com/funwebdev/3rd/api/stocks/companies.php';
@@ -41,26 +40,14 @@ else {
     displayList();
 }
     
-
-// Search for company Symbol
-//const searchBox = document.querySelector('.search');
-
-
-/*btnGo.addEventListener('click', function() {
-        var searchBox = document.getElementById("btnGo");        
-        //let searchText = document.querySelector('.search').value;
-        displayList(searchBox.value);
-});*/
 document.querySelector("div.f ").style.visibility='hidden';
 document.querySelector("div.e ").style.visibility='hidden';
 document.querySelector("div.h ").style.visibility='hidden';
 displaySpeakButtoms();
 displayButtonDefaultview();
 displayButtonViewChart();
-  
             
 // Functions definitions
-
 function displayList(filter=''){
     let ul = document.getElementById("StockList");
     ul.innerHTML = "";
@@ -108,7 +95,6 @@ function displayList(filter=''){
     
 }   
 
-
 //Pass symbol to the url to check if the data is stored in the localstorage  
 let currentSelectedSymbol='';
 let selectedCompanayName='';
@@ -132,14 +118,11 @@ function getCompanyData(cmpny){
                    console.error(e);
                }
             }
-
     } 
     else {
         companyLocalData = localStorage.getItem("["+cmpny+"]"); //Data is found
         displayInfo(companyLocalData);
-    
-    }
-  
+    } 
 }
     
 // Display the symbol with its logo  
@@ -271,7 +254,6 @@ function displaychartInfo(charts){
     let avgClose=0;
     let avgVol=0;
   
-
     //arrays for the charts
     openCalc =[];
     closeCalc =[];
@@ -280,7 +262,6 @@ function displaychartInfo(charts){
     volumeCalc =[];
     closePrices =[];
    
-
     for (let i = 0; i < companiescharts.length; i++){
         openCalc.push(companiescharts[i].open);
         closeCalc.push(companiescharts[i].close);
@@ -326,9 +307,7 @@ function displaychartInfo(charts){
     x = [];
 
     for (let i = 0; i < companiescharts.length; i++){
-        // adds row
-        
-        
+        // adds row      
         var tr = document.createElement("tr");
         tbl.appendChild(tr);
 
@@ -365,12 +344,8 @@ function displaychartInfo(charts){
          (companiescharts[i]['close'] < minClose) ? minClose = companiescharts[i]['close'] : console.log('');
          avgVol = avgVol + companiescharts[i]['volume'];
          totalVol = totalVol + companiescharts[i]['volume'];
-
     }
-
 }
-
-
 
 function finicalTable(finData){
      
@@ -393,9 +368,7 @@ function finicalTable(finData){
     } else {
         sec.innerHTML= "No Financial Data";
     }
-    
 }
-
 
 function average(nums) {
     let avg =0.0;
@@ -430,8 +403,7 @@ function displayButtonViewChart() {
         document.querySelector("div.e section").style.display = "block";
         // passing the value to draw the chart
         displayChart(closePrices,volums,x); 
-    });
-    
+    }); 
 }
     
 //Having two clicked buttom to speck the content on th screen.    
@@ -516,18 +488,14 @@ function displayChart(closePrices,volums,x){
                 data: volums,
                 type: 'line',
                 name:'Volumes'
-            }
-            
+            }         
         ]
     };
     
     if (option && typeof option === "object") {
         myChart.setOption(option, true);
     }
-    
-
 }
-
 
 function Chart2(companyInfo){
     if (companyInfo[0].financials != null) {
@@ -594,7 +562,4 @@ btnClear.addEventListener('click', function() {
     document.getElementById("filterList").value ="";
     displayList();
 }) 
-
 });
-
-
