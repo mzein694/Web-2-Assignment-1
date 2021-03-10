@@ -42,7 +42,7 @@ else {
 document.querySelector("div.f ").style.visibility='hidden';
 document.querySelector("div.e ").style.visibility='hidden';
 document.querySelector("div.h ").style.visibility='hidden';
-speakBtns();
+//speakBtns();
 defaultViewBtn();
 viewChartBtn();
             
@@ -393,22 +393,22 @@ function viewChartBtn() {
 }
     
 //text speech is heard when button is clicked   
-function speakBtns() {
-    let compDescSpeakBtn = document.getElementById("compDescSpeakBtn");
-    let textBtn2 = document.createTextNode('Speak');
-    compDescSpeakBtn.appendChild(textBtn2);
+// function speakBtns() {
+//     let compDescSpeakBtn = document.getElementById("compDescSpeakBtn");
+//     let textBtn2 = document.createTextNode('Speak');
+//     compDescSpeakBtn.appendChild(textBtn2);
     
-    compDescSpeakBtn.addEventListener("click",function(){
-        speakText(selectedCompanayDesc);
-    });
-}
+//     compDescSpeakBtn.addEventListener("click",function(){
+//         speakText(selectedCompanayDesc);
+//     });
+// }
 
-//Speak functiion     
-function speakText(txt){
-    let message = new SpeechSynthesisUtterance();
-    message.text = txt;
-    window.speechSynthesis.speak(message);
-}
+// //Speak functiion     
+// function speakText(txt){
+//     let message = new SpeechSynthesisUtterance();
+//     message.text = txt;
+//     window.speechSynthesis.speak(message);
+// }
    
 // Displays the volumes, close prices and the date on the chart 
 let closePrices =[];
